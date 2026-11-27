@@ -121,9 +121,13 @@ Jangan menghapusnya sebelum penggantinya berjalan dan sudah diuji.
   (langit → kamera turun dengan parallax → menu) memakai aset
   `public/assets/opening/` (daftar di `openingAssets.js`). Menu: Mulai
   Petualangan, Pengaturan (musik/volume, nonaktif sampai file musik diisi di
-  `OPENING_MUSIC`), Tentang Game, Keluar. Intro dapat dilewati, hanya diputar
-  sekali per sesi, dan dilewati bila `prefers-reduced-motion`. Font Fredoka/
-  Baloo 2 dimuat dari Google Fonts di `index.html`. Tombol Petunjuk belum ada.
+  `OPENING_MUSIC`), Tentang Game, Keluar. Intro awal hanya diputar
+  sekali per sesi, dan dilewati bila `prefers-reduced-motion`. Tombol Lewati
+  intro serta pintasan tap/keyboard di opening awal sudah dihapus; transisi
+  ke menu berjalan otomatis. Pada portrait, logo, karakter, dan menu memakai
+  baris terpisah; ukuran Malin mengikuti slot tersisa supaya tidak menutup
+  tombol. Portrait pendek menempatkan dua tombol sekunder berdampingan.
+  Font Fredoka/Baloo 2 dimuat dari Google Fonts di `index.html`. Tombol Petunjuk belum ada.
 - `src/components/OpeningCinematic.jsx` + `.css`, `cinematicConfig.js`,
   `cinematicMotion.js`, `TransitionShots.jsx`: cinematic yang **berlanjut dari
   Main Menu** (fase `story` di `MainMenu.jsx`). Tidak ada logo/layar judul kedua.
@@ -232,8 +236,15 @@ Jangan menghapusnya sebelum penggantinya berjalan dan sudah diuji.
   tidak berubah. `worldLayout.json` + `build_chapter1_world.py` (world lama dari 6 lukisan area)
   disimpan tetapi tidak dipakai lagi.
 - `src/game/levelFraming.js`: `LEVEL_VIEW` dan `levelView()` (zoom/pusat kamera
-  untuk ukuran layar apa pun; kaki di ≤84% tinggi layar) dipakai bersama oleh
-  LevelOneScene dan OpeningVillageScene agar akhir intro identik dengan gameplay.
+  untuk ukuran layar apa pun; garis pijakan tetap di 84% tinggi layar) dipakai
+  bersama oleh LevelOneScene dan OpeningVillageScene agar akhir intro identik
+  dengan gameplay. Tinggi pandang dibatasi jarak tanah ke batas atas/bawah
+  gambar, bukan tinggi gambar penuh; tablet mempersempit lebar pandang sehingga
+  area tanah/air di bawah tidak bertambah. Kamera hanya mengikuti gerak horizontal.
+  Pada cinematic di perangkat sentuh/layar pendek, tanah juga dijaga di 84%
+  sepanjang zoom dan transisi ke gameplay. Dialog/narasi adegan kampung tampil
+  di atas karakter dan tombol Lewati Cinematic di kanan bawah; posisi teks shot
+  teluk/dermaga dan framing cinematic desktop tetap mengikuti pengaturan semula.
 - `src/game/npcAssets.js`: konfigurasi terpusat sheet Ibu + 4 NPC (path, frame
   200×216, kaki y=210, animasi idle/walk/action, `mother-talk`, frame peti buruh).
 - `src/game/npc/AmbientNpc.js`: NPC dengan aksi acak yang dipilih hanya saat aksi

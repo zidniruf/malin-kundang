@@ -1,0 +1,100 @@
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  min-height: 100dvh;
+  background: linear-gradient(#0798e2 0%, #65cdf2 65%, #079eaf 100%);
+  color: #fff5db;
+  font-family: 'Fredoka', 'Baloo 2', 'Trebuchet MS', sans-serif;
+  text-align: center;
+}
+.loading-world { position: absolute; inset: 0; pointer-events: none; }
+.loading-world > img { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.loading-world .loading-clouds { animation: loading-cloud-drift 16s ease-in-out infinite alternate; }
+.loading-world .loading-reef { opacity: .55; }
+.loading-world .loading-ship {
+  width: clamp(100px, 15vw, 250px);
+  height: auto;
+  left: 8%;
+  bottom: 12%;
+  filter: drop-shadow(0 8px 5px #00506c44);
+  animation: loading-sail 4s ease-in-out infinite;
+}
+.loading-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 3vh, 30px);
+  height: 100dvh;
+  padding: max(20px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  background: linear-gradient(transparent 45%, #006d9222);
+}
+.loading-logo { width: min(48vw, 650px); max-height: 48dvh; object-fit: contain; filter: drop-shadow(0 8px 0 #0071a66b); }
+.loading-panel { width: min(670px, 74vw); }
+.loading-panel h1 {
+  margin: 0 0 18px;
+  font-weight: 600;
+  font-size: clamp(26px, 3.8vw, 52px);
+  line-height: 1.1;
+  text-shadow: 0 3px #c57424, 0 5px 6px #005e8e66;
+}
+.loading-track {
+  height: clamp(24px, 4vw, 46px);
+  padding: 5px;
+  overflow: hidden;
+  border: 3px solid #fff5ce;
+  border-radius: 100px;
+  background: #fff0cd;
+  box-shadow: 0 0 0 3px #e9a650, inset 0 3px 6px #c27b3b55, 0 8px 0 #03638433;
+}
+.loading-fill {
+  height: 100%;
+  position: relative;
+  min-width: 0;
+  border-radius: inherit;
+  background: linear-gradient(#ffe66a 0%, #ffbf09 40%, #ff9200 66%, #ff680c 100%);
+  box-shadow: inset 0 3px 0 #fff6a8aa, inset 0 -3px 0 #e36916;
+  transition: width .25s ease-out;
+  overflow: hidden;
+}
+.loading-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(120deg, transparent 0 32px, #fff8 32px 50px, transparent 50px 82px);
+  background-size: 190px 100%;
+  opacity: .25;
+  animation: loading-shimmer 2s linear infinite;
+}
+.loading-meta { display: flex; justify-content: space-between; gap: 16px; margin-top: 18px; font-size: clamp(18px, 2.2vw, 28px); text-shadow: 0 2px 3px #005777; }
+.loading-meta strong { font-variant-numeric: tabular-nums; }
+.loading-caption { min-height: 2.8em; margin: 10px auto 0; max-width: 440px; font-size: 16px; line-height: 1.4; color: white; text-shadow: 0 1px 4px #004765, 0 1px 8px #004765; }
+.loading-retry { margin-top: 12px; padding: 12px 30px; border: 2px solid #fff2c4; border-radius: 100px; background: #ffb830; color: #553214; font: inherit; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 4px #ba691e; }
+.loading-retry:focus-visible { outline: 3px solid white; outline-offset: 5px; }
+@keyframes loading-sail { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translate(12px, -9px) rotate(2deg); } }
+@keyframes loading-cloud-drift { from { transform: translateX(-1%) scale(1.04); } to { transform: translateX(1%) scale(1.04); } }
+@keyframes loading-shimmer { to { background-position: 190px 0; } }
+@media (orientation: portrait) {
+  .loading-logo { width: min(86vw, 520px); max-height: 38dvh; }
+  .loading-panel { width: min(86vw, 500px); }
+  .loading-content { justify-content: flex-start; padding-top: 16dvh; gap: 5dvh; }
+  .loading-world > img { object-position: 65% center; }
+  .loading-world .loading-ship { left: 6%; bottom: 8%; width: 30vw; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .loading-content { gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+  .loading-logo { max-height: 42dvh; }
+  .loading-panel { width: min(540px, 65vw); }
+  .loading-panel h1 { font-size: 26px; margin-bottom: 10px; }
+  .loading-track { height: 20px; padding: 3px; }
+  .loading-meta { margin-top: 10px; font-size: 18px; }
+  .loading-caption { margin-top: 4px; min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-world .loading-ship, .loading-world .loading-clouds, .loading-fill::after { animation: none; }
+  .loading-fill { transition: none; }
+}

@@ -291,7 +291,7 @@ export default function OpeningCinematic({ sceneRef, startState, onPlay }) {
   }, [skip])
 
   return (
-    <div ref={overlayRef} className="oc" data-cue={cue}>
+    <div ref={overlayRef} className="oc" data-cue={cue} data-village={villageVisible || undefined}>
       {!shotsGone && <TransitionShots controlRef={shotsControl} />}
       {villageMounted && (
         <VillageStage
@@ -316,7 +316,7 @@ export default function OpeningCinematic({ sceneRef, startState, onPlay }) {
       {/* Mulai `lepas`: teks, tombol, dan letterbox menghilang sementara kamera menuju framing gameplay. */}
       {!at('lepas') && !skipping && (
         <button type="button" className="oc-skip" onClick={skip}>
-          Lewati Cinematic <span aria-hidden="true">››</span>
+          Skip <span aria-hidden="true">››</span>
         </button>
       )}
     </div>

@@ -392,6 +392,23 @@
   .oc-narration-text { font-size: clamp(0.95rem, 0.7rem + 1vw, 1.2rem); }
 }
 
+/* Adegan kampung di perangkat sentuh/layar pendek: dialog di atas karakter.
+   Garis pijakan tetap rendah saat zoom; ruang tanah di bawah tidak dipakai untuk dialog.
+   Shot teluk/dermaga sebelumnya tetap menggunakan posisi narasi semula. */
+@media (pointer: coarse), (orientation: landscape) and (max-height: 520px) {
+  .oc[data-village='true'] .oc-narration-slot {
+    top: calc(var(--bar) + max(24px, env(safe-area-inset-top)));
+    bottom: auto;
+    left: 50%;
+    width: min(720px, 90vw);
+    transform: translateX(-50%);
+  }
+  .oc[data-village='true'] .oc-skip {
+    top: auto;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}
+
 /* Kurangi gerakan: kamera diam (diatur JS), animasi dekoratif dimatikan. */
 @media (prefers-reduced-motion: reduce) {
   .oc *,

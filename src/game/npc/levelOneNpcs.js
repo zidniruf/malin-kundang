@@ -1,6 +1,7 @@
 import AmbientNpc from './AmbientNpc'
 import { EventBus } from '../EventBus'
 import { motherAsset, npcAssets } from '../npcAssets'
+import { preloadAsset } from '../preloadAsset'
 
 // Warga kampung di world map Chapter 1 (lantai y=600; batas area di worldLayout.json):
 //   Area 1 Rumah Malin 0–1324 · Area 2 Dermaga Nelayan 1324–2473 · Area 3 Dermaga Rusak 2473–3622 ·
@@ -37,7 +38,7 @@ export function spawnLevelOneNpcs(scene) {
   const onError = (file) => {
     failed.add(file.key)
     console.error(`NPC gagal dimuat: ${file.key} (${file.url})`)
-    if (file.key === motherAsset.key) load.image(motherAsset.fallback.key, motherAsset.fallback.url)
+    if (file.key === motherAsset.key) preloadAsset(scene, motherAsset.fallback.key, motherAsset.fallback.url)
   }
 
   const spawn = () => {
@@ -61,7 +62,7 @@ export function spawnLevelOneNpcs(scene) {
   load.on('loaderror', onError)
   for (const asset of assets) {
     if (!scene.textures.exists(asset.key)) {
-      load.spritesheet(asset.key, asset.url, { frameWidth: asset.frameWidth, frameHeight: asset.frameHeight })
+      preloadAsset(scene, asset.key, asset.url, { frameWidth: asset.frameWidth, frameHeight: asset.frameHeight })
     }
   }
   load.once('complete', spawn)

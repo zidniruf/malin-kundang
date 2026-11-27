@@ -5,6 +5,7 @@ import { measureStart, preloadCinematic } from './cinematicMotion'
 import { useAudioSettings, useMenuMusic } from './useMenuMusic'
 import { tryLockLandscape } from './useDeviceProfile'
 import './MainMenu.css'
+import { preloadImage } from '../loading/preload'
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const INTRO_PHASES = ['loading', 'sky', 'reveal']
@@ -27,12 +28,7 @@ function usePrefersReducedMotion() {
 }
 
 function preloadImages(urls) {
-  return Promise.all(urls.map((url) => new Promise((resolve) => {
-    const image = new Image()
-    image.onload = () => resolve({ url, ok: true })
-    image.onerror = () => resolve({ url, ok: false })
-    image.src = url
-  })))
+  return Promise.all(urls.map(preloadImage))
 }
 
 const ICONS = {
@@ -193,6 +189,7 @@ export default function MainMenu({ onStart }) {
   const dialogRef = useRef(null)
   const titleSlotRef = useRef(null)
   const titleRef = useRef(null)
+  const characterSlotRef = useRef(null)
   const inIntro = INTRO_PHASES.includes(phase)
   const inStory = phase === 'story'
 
@@ -249,16 +246,6 @@ export default function MainMenu({ onStart }) {
     return () => window.clearTimeout(timer)
   }, [phase])
 
-  const skipIntro = useCallback(() => {
-    setPhase((current) => (current === 'sky' || current === 'reveal' ? 'menu' : current))
-  }, [])
-
-  useEffect(() => {
-    if (phase !== 'sky' && phase !== 'reveal') return undefined
-    window.addEventListener('keydown', skipIntro)
-    return () => window.removeEventListener('keydown', skipIntro)
-  }, [phase, skipIntro])
-
   // Judul berada di slot menu (kiri). Saat intro, judul digeser ke tengah dan diperbesar
   // dengan transform agar transisi ke posisi menu halus pada semua ukuran layar.
   useLayoutEffect(() => {
@@ -278,11 +265,20 @@ export default function MainMenu({ onStart }) {
       title.style.setProperty('--title-dx', `${dx}px`)
       title.style.setProperty('--title-dy', `${dy}px`)
       title.style.setProperty('--title-scale', String(scale))
+
+      // Di portrait, karakter memakai ruang tersisa DI ANTARA logo dan menu.
+      // Ukur slot agar ukuran teks, safe area, dan perubahan tinggi browser tetap aman.
+      const characterRect = characterSlotRef.current?.getBoundingClientRect()
+      if (characterRect?.height) {
+        rootRef.current?.style.setProperty('--mobile-character-height', `${characterRect.height}px`)
+        rootRef.current?.style.setProperty('--mobile-character-bottom', `${viewportHeight - characterRect.bottom}px`)
+      }
     }
 
     measure()
     const observer = new ResizeObserver(measure)
     observer.observe(slot)
+    if (characterSlotRef.current) observer.observe(characterSlotRef.current)
     window.addEventListener('resize', measure)
     return () => {
       observer.disconnect()
@@ -315,7 +311,6 @@ export default function MainMenu({ onStart }) {
       data-phase={phase}
       data-reduced-motion={reducedMotion || undefined}
       style={{ '--reveal-ms': `${OPENING_TIMING.revealMs}ms` }}
-      onPointerDown={inIntro ? skipIntro : undefined}
     >
       {/* Kamera cinematic: tanpa transform saat menu, sehingga tampilan menu tidak berubah. */}
       <div className="mm-camera">
@@ -366,6 +361,8 @@ export default function MainMenu({ onStart }) {
             </h1>
           </div>
 
+          <div className="mm-character-slot" ref={characterSlotRef} aria-hidden="true" />
+
           <div className="mm-menu" inert={inIntro || inStory || undefined} aria-hidden={inIntro || inStory || undefined}>
             <p className="mm-tagline">
               Sebuah perjalanan tentang keluarga, perjuangan, dan pentingnya menghormati orang tua.
@@ -383,12 +380,6 @@ export default function MainMenu({ onStart }) {
       </div>
 
       {phase === 'loading' && <p className="mm-loading" role="status">Memuat kampung pesisir…</p>}
-
-      {(phase === 'sky' || phase === 'reveal') && (
-        <button type="button" className="mm-skip" onClick={skipIntro}>
-          Lewati intro <span aria-hidden="true">›</span>
-        </button>
-      )}
 
       {inStory && (
         <OpeningCinematic sceneRef={rootRef} startState={startStateRef} onPlay={onStart} />

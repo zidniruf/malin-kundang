@@ -3,6 +3,7 @@
 import {
   ALL_CINEMATIC_IMAGES, MENU_CAMERA_KEYS, MENU_DEPTH, SHIP_DRIFT_PER_SECOND, SHIP_FADE_IN_SECONDS, TRANSITION_SHOTS,
 } from './cinematicConfig'
+import { preloadImage } from '../loading/preload'
 
 const MENU_STAGE_RATIO = 1672 / 941
 
@@ -30,12 +31,7 @@ function sampleKeys(keys, t) {
 let preloadPromise = null
 export function preloadCinematic() {
   if (!preloadPromise) {
-    preloadPromise = Promise.all(ALL_CINEMATIC_IMAGES.map((url) => new Promise((resolve) => {
-      const image = new Image()
-      image.onload = () => resolve({ url, ok: true })
-      image.onerror = () => resolve({ url, ok: false })
-      image.src = url
-    })))
+    preloadPromise = Promise.all(ALL_CINEMATIC_IMAGES.map(preloadImage))
   }
   return preloadPromise
 }

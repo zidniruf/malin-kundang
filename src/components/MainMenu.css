@@ -73,7 +73,7 @@
 .mm-beach { transition-delay: 80ms; }
 .mm-underwater { transition-delay: 220ms; }
 
-/* Lewati intro: layer tiba lebih cepat. */
+/* Posisi akhir layer setelah intro. */
 .mm[data-phase='menu'] .mm-layer { transition-duration: 1.1s; transition-delay: 0ms; }
 
 /* Awan bergerak perlahan (loop bolak-balik agar tepi gambar tidak terpotong). */
@@ -232,6 +232,8 @@
   width: min(460px, 38vw);
   min-width: 260px;
 }
+
+.mm-character-slot { display: none; }
 
 .mm-title-slot {
   /* Title art berasio 4:3; batasi lebar dengan tinggi viewport agar menu selalu muat. */
@@ -460,10 +462,9 @@
   font-size: 1.05rem;
 }
 
-/* ---------- Status & lewati ---------- */
+/* ---------- Status ---------- */
 
 .mm-loading,
-.mm-skip,
 .mm-error {
   position: absolute;
   z-index: 4;
@@ -482,24 +483,6 @@
   text-shadow: 0 2px 8px rgb(0 40 60 / 0.5);
   animation: mm-shimmer-pulse 1.2s ease-in-out infinite alternate;
 }
-
-.mm-skip {
-  right: max(20px, env(safe-area-inset-right));
-  bottom: max(18px, env(safe-area-inset-bottom));
-  padding: 0.45em 1.1em;
-  border: 2px solid rgb(255 255 255 / 0.7);
-  border-radius: 999px;
-  background: rgb(11 58 82 / 0.35);
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: background 0.2s ease;
-}
-
-.mm-skip:hover { background: rgb(11 58 82 / 0.6); }
-.mm-skip:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 
 .mm-error {
   left: 50%;
@@ -775,22 +758,38 @@
   .mm-malin { right: 0; }
 }
 
-/* Potret (smartphone/tablet tegak): judul di atas, menu di bawah, Malin di kanan. */
+/* Potret: tiga baris terpisah untuk logo, karakter, dan tombol. */
 @media (orientation: portrait) {
   .mm { --mm-stage-x: 74%; --mm-stage-y: 50%; }
 
+  .mm-ui {
+    padding:
+      max(16px, env(safe-area-inset-top))
+      max(24px, env(safe-area-inset-right))
+      max(24px, env(safe-area-inset-bottom))
+      max(24px, env(safe-area-inset-left));
+  }
+
   .mm-column {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    justify-items: center;
+    align-items: stretch;
+    gap: 12px;
     width: 100%;
     min-width: 0;
-    align-items: center;
-    justify-content: space-between;
+    min-height: 0;
     text-align: center;
   }
 
-  .mm-title-slot { width: min(82vw, 440px, 48dvh); }
-  .mm-menu { align-items: center; width: min(86vw, 380px); }
+  .mm-title-slot { width: min(76vw, 37dvh, 360px); }
+  .mm-character-slot { display: block; width: 100%; min-height: 0; }
+  .mm-menu { align-items: stretch; width: min(100%, 340px); }
   .mm-tagline { display: none; }
-  .mm-nav { width: 100%; }
+  .mm-nav { width: 100%; gap: 10px; }
+  .mm-btn { min-height: 52px; padding: 7px 16px 7px 8px; font-size: 1rem; }
+  .mm-btn--primary { font-size: 1.0625rem; }
+  .mm-btn-icon { width: 1.75em; height: 1.75em; }
 
   .mm-scrim {
     background:
@@ -799,16 +798,26 @@
   }
 
   .mm-malin {
-    right: -10vw;
-    bottom: 24vh;
-    bottom: 24dvh;
-    height: min(46vh, 120vw);
-    height: min(46dvh, 120vw);
+    left: 50%;
+    right: auto;
+    bottom: calc(var(--mobile-character-bottom, 270px) + 8px);
+    height: max(0px, min(340px, calc(var(--mobile-character-height, 24dvh) - 16px)));
+    max-width: 70vw;
+    object-fit: contain;
+    translate: -50% 0;
   }
 
   @keyframes mm-btn-in {
     from { opacity: 0; transform: translateY(24px) scale(0.92); }
   }
+}
+
+/* Portrait pendek: dua tombol sekunder berdampingan memberi ruang untuk karakter. */
+@media (orientation: portrait) and (max-height: 700px) {
+  .mm-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mm-nav-item:first-child, .mm-nav-item:last-child { grid-column: 1 / -1; }
+  .mm-btn { height: 100%; gap: 6px; padding-inline: 8px; }
+  .mm-btn-icon { width: 1.5em; height: 1.5em; }
 }
 
 /* Landscape pendek (smartphone miring). */
@@ -821,6 +830,22 @@
   .mm-btn--primary { font-size: 1.05rem; }
   .mm-btn-icon { width: 1.8em; height: 1.8em; }
   .mm-malin { height: 92vh; height: 92dvh; bottom: -4vh; }
+}
+
+/* HP landscape: semua tombol tetap utuh, termasuk pada layar setinggi 320 px. */
+@media (orientation: landscape) and (max-width: 900px) and (max-height: 520px) {
+  .mm-ui {
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(20px, env(safe-area-inset-right))
+      max(10px, env(safe-area-inset-bottom))
+      max(20px, env(safe-area-inset-left));
+  }
+  .mm-column { width: min(340px, 46vw); min-width: 0; }
+  .mm-title-slot { width: min(100%, 38dvh); }
+  .mm-nav { gap: 6px; }
+  .mm-btn, .mm-btn--primary { min-height: 44px; padding-block: 4px; font-size: 1rem; }
+  .mm-btn-icon { width: 1.6em; height: 1.6em; }
 }
 
 /* Pengguna yang mengurangi animasi: tanpa intro, loop, atau gerakan dekoratif. */

@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import { malinAnimations } from '../malinAssets'
 import { registerCharacterAnimations } from '../npcAssets'
 import AmbientNpc from '../npc/AmbientNpc'
+import { preloadAsset } from '../preloadAsset'
 import { FLOOR_Y as NPC_FLOOR_Y } from '../npc/levelOneNpcs'
 import { LEVEL_VIEW, levelView } from '../levelFraming'
 import { WORLD_DEPTH, addWorldVisuals, preloadWorld } from '../chapter1/world'
@@ -38,14 +39,14 @@ export default class OpeningVillageScene extends Phaser.Scene {
     preloadWorld(this, cfg.worldRange)
     const villagerSheets = [...new Set(cfg.villagers.map((npc) => npc.asset))]
     for (const sheet of [cfg.malin, cfg.mother, ...villagerSheets]) {
-      this.load.spritesheet(sheet.key, sheet.url, { frameWidth: sheet.frameWidth, frameHeight: sheet.frameHeight })
+      preloadAsset(this, sheet.key, sheet.url, { frameWidth: sheet.frameWidth, frameHeight: sheet.frameHeight })
     }
   }
 
   create() {
     if (this.failed.has(this.cfg.mother.key)) {
       // Fallback: gambar Ibu statis yang sudah ada, lalu bangun adegan setelah termuat.
-      this.load.image(this.cfg.mother.fallback.key, this.cfg.mother.fallback.url)
+      preloadAsset(this, this.cfg.mother.fallback.key, this.cfg.mother.fallback.url)
       this.load.once('complete', () => this.build())
       this.load.start()
       return
@@ -217,12 +218,18 @@ export default class OpeningVillageScene extends Phaser.Scene {
     const { width, height } = this.scale
     const view = levelView(width, height, this.malin.x)
     const { x, feet, m, g } = this.shot
-    const zoom = view.zoom * m
-    // Layar pendek (HP landscape): kotak dialog relatif lebih tinggi, jadi karakter dinaikkan.
-    const compact = this.scale.parentSize.height <= 520 ? this.cfg.compactFeetShift : 0
-    const shotY = LEVEL_VIEW.floorY - (feet + compact - 0.5) * (height / zoom)
+    const shotZoom = view.zoom * m
+    const zoom = Phaser.Math.Linear(shotZoom, view.zoom, g)
+    const mobile = this.scale.parentSize.height <= 520 || window.matchMedia('(pointer: coarse)').matches
+    // Mobile: zoom berpusat pada garis pijakan, bukan pusat layar. Hitung posisi Y
+    // dari zoom AKTUAL agar tanah tidak bergeser selama zoom-out menuju gameplay.
+    // Dialog mobile ada di atas, sehingga karakter tidak perlu dinaikkan lagi.
+    const shotY = LEVEL_VIEW.floorY - (feet - 0.5) * (height / shotZoom)
+    const centerY = mobile
+      ? LEVEL_VIEW.floorY - (LEVEL_VIEW.feetOnScreen - 0.5) * (height / zoom)
+      : Phaser.Math.Linear(shotY, view.centerY, g)
     const camera = this.cameras.main
-    camera.setZoom(Phaser.Math.Linear(zoom, view.zoom, g))
-    camera.centerOn(Phaser.Math.Linear(x, view.centerX, g), Phaser.Math.Linear(shotY, view.centerY, g))
+    camera.setZoom(zoom)
+    camera.centerOn(Phaser.Math.Linear(x, view.centerX, g), centerY)
   }
 }

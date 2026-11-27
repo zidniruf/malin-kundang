@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import kit from './kit.json'
+import { preloadAsset } from '../preloadAsset'
 import {
   AREAS, BACKDROP, FLOOR_Y, GROUNDS, LAND_FOREST, PLACEMENTS, RUNS, VIEW, WALK_BOUNDS, WORLD_HEIGHT, WORLD_WIDTH,
 } from './layout'
@@ -181,7 +182,7 @@ export function worldImageUrls(range = {}) {
 
 export function preloadWorld(scene, range = {}) {
   for (const texture of textureList(range)) {
-    if (!scene.textures.exists(texture.key)) scene.load.image(texture.key, url(texture.url))
+    preloadAsset(scene, texture.key, url(texture.url))
   }
 }
 

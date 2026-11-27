@@ -11,7 +11,21 @@
     <title>Malin Kundang: The Moral Adventure</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot-splash" role="status">
+        <strong>Malin Kundang</strong>
+        <span class="boot-dots" aria-hidden="true">● ● ●</span>
+        <span>Menyiapkan petualangan…</span>
+      </div>
+    </div>
+    <style>
+      .boot-splash { position: fixed; inset: 0; display: flex; flex-direction: column; gap: 22px; align-items: center; justify-content: center; background: linear-gradient(#0798e2, #65cdf2 65%, #079eaf); color: #fff5db; font: 18px 'Trebuchet MS', sans-serif; text-align: center; }
+      .boot-splash strong { font-size: clamp(32px, 7vw, 64px); text-shadow: 0 4px #087ba4; }
+      .boot-dots { color: #ffcf4b; letter-spacing: 8px; animation: boot-pulse 1s ease-in-out infinite alternate; }
+      @keyframes boot-pulse { to { opacity: .35; transform: translateY(-5px); } }
+      @media (prefers-reduced-motion: reduce) { .boot-dots { animation: none; } }
+    </style>
+    <noscript>Aktifkan JavaScript di browser untuk memainkan Malin Kundang.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import { EventBus } from '../EventBus'
 import { malinAsset, malinAnimations } from '../malinAssets'
 import PlayerControls from '../PlayerControls'
+import { preloadAsset } from '../preloadAsset'
 import { spawnLevelOneNpcs } from '../npc/levelOneNpcs'
 import { attachLevelCamera } from '../levelFraming'
 import { WORLD, WORLD_DEPTH, addWorldColliders, addWorldVisuals, preloadWorld, respawnPoint } from '../chapter1/world'
@@ -34,7 +35,7 @@ export default class LevelOneScene extends Phaser.Scene {
     this.load.on('loaderror', onLoadError)
     this.load.once('complete', () => this.load.off('loaderror', onLoadError))
     preloadWorld(this)
-    this.load.spritesheet(malinAsset.key, malinAsset.url, {
+    preloadAsset(this, malinAsset.key, malinAsset.url, {
       frameWidth: malinAsset.frameWidth,
       frameHeight: malinAsset.frameHeight,
     })

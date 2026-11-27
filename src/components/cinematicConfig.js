@@ -86,7 +86,8 @@ export const VILLAGE_SCENE = {
   villagers: LEVEL_ONE_NPCS.filter((npc) => npc.id !== 'ibu'),
   // Kamera: x = pusat horizontal (dunia), feet = posisi lantai di layar (0..1), m = zoom × zoom
   // gameplay. Kunci `gameplay` = berbaur penuh ke framing gameplay (levelFraming.js).
-  // Lebar dunia yang terlihat = 1280 / m (16:9 dan lebih lebar; 4:3 lebih sempit), dan kamera
+  // Pada perangkat sentuh/layar pendek, feet memakai jangkar tanah gameplay selama zoom.
+  // Lebar dunia yang terlihat = lebar pandang gameplay / m, dan kamera
   // pusatnya di x≈660–700, jadi bingkai terlebar intro = x ≈200–1160 (m 1,4). Ibu mulai di x 150 dan
   // Malin di x 1100 (keduanya di luar bingkai). Warga (levelOneNpcs.js) berada di luar rentang itu:
   // sudah ada di dunia, lalu terlihat saat kamera mundur ke framing gameplay.
@@ -97,8 +98,6 @@ export const VILLAGE_SCENE = {
     { t: 20.6, x: 660, feet: 0.68, m: 1.5 }, // dorong pelan selama dialog & narasi
     { t: 24.2, gameplay: true }, // zoom berkurang perlahan sampai pas dengan Chapter 1
   ],
-  // Di layar pendek (HP landscape) karakter dinaikkan agar tidak tertutup kotak dialog.
-  compactFeetShift: -0.08,
   malinScript: [
     { t: 0.8, action: 'walk', to: PLAYER_START_X, duration: 3, face: -1 }, // menuju rumah
     { t: 4.4, face: 1 }, // memandang laut

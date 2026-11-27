@@ -8,10 +8,10 @@ import { WORLD } from './chapter1/world'
 // Game memakai Scale.EXPAND dengan ukuran dasar 1280×720: kanvas selalu memenuhi layar dan ukuran
 // game melebar/meninggi mengikuti rasio layar (tanpa stretch, tanpa area blur). Kamera lalu memilih
 // potongan dunia yang terlihat:
-//   - Lebar terlihat 1280 px dunia (ukuran karakter sama di semua layar ≥ 16:9). Kaki Malin dijaga
-//     di ≤ 84% tinggi layar agar tombol sentuh tidak menutupinya.
-//   - Tinggi terlihat dibatasi area yang tertutup gambar di SEMUA area (WORLD.view); layar yang lebih
-//     tinggi (tablet 4:3) melihat lebar dunia yang lebih sempit.
+//   - Lebar terlihat maksimal 1280 px dunia. Garis tanah tetap di 84% tinggi layar,
+//     menyisakan ruang yang sama untuk kontrol sentuh pada tablet maupun HP.
+//   - Tinggi terlihat juga dibatasi jarak tanah ke batas atas/bawah gambar. Pada layar lebih
+//     tinggi, kamera mempersempit lebar pandang, bukan menambahkan area tanah/air di bawah.
 //   - Dunia selebar 7500 px: kamera selalu mengikuti Malin secara horizontal.
 export const LEVEL_VIEW = {
   worldWidth: WORLD.width,
@@ -26,10 +26,18 @@ export const LEVEL_VIEW = {
 export function levelView(gameWidth, gameHeight, focusX) {
   const { worldWidth, viewTop, viewBottom, viewWidth, floorY, feetOnScreen } = LEVEL_VIEW
   const aspect = gameWidth / gameHeight
+  // Menjaga floorY pada feetOnScreen hanya mungkin jika seluruh potongan kamera masih
+  // berada dalam bounds. Batas lama memakai tinggi dunia penuh; pada tablet, clamp
+  // kemudian mendorong garis tanah ke atas dan memperbesar ruang kosong di bawahnya.
+  const maxVisibleHeight = Math.min(
+    viewBottom - viewTop,
+    (floorY - viewTop) / feetOnScreen,
+    (viewBottom - floorY) / (1 - feetOnScreen),
+  )
   let visibleWidth = viewWidth
   let visibleHeight = viewWidth / aspect
-  if (visibleHeight > viewBottom - viewTop) {
-    visibleHeight = viewBottom - viewTop
+  if (visibleHeight > maxVisibleHeight) {
+    visibleHeight = maxVisibleHeight
     visibleWidth = visibleHeight * aspect
   }
   const top = Phaser.Math.Clamp(floorY - feetOnScreen * visibleHeight, viewTop, viewBottom - visibleHeight)
