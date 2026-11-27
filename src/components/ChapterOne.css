@@ -1,0 +1,550 @@
+/* Layar gameplay Chapter 1: Kampung Nelayan (mobile first, landscape).
+   Kanvas Phaser memenuhi seluruh layar (Scale.EXPAND + framing kamera di levelFraming.js), jadi
+   tidak ada lagi bilah/backdrop blur. Ukuran HUD mengikuti tinggi layar (--gh). */
+
+.ch-screen {
+  --ch-font: 'Fredoka', 'Baloo 2', 'Nunito', 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif;
+  --ch-cream: #f8ecd0;
+  --ch-cream-deep: #ecd6a6;
+  --ch-wood: #7a4b24;
+  --ch-wood-dark: #4f2e14;
+  --ch-ink: #4a2c12;
+  --ch-gold: #e0ac4a;
+  --ch-gold-soft: rgb(240 199 112 / 0.85);
+
+  /* Sama dengan .mm (Main Menu/cinematic) agar ukuran kanvas identik saat serah terima. */
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  background: #123247;
+  font-family: var(--ch-font);
+  color: var(--ch-cream);
+  overscroll-behavior: none;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Masuk dari gelap hanya setelah Lewati Cinematic. Dari akhir intro (seamless) frame pertama
+   game sama dengan frame terakhir cinematic, jadi tidak ada tirai. */
+.ch-screen--fade::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: #071c27;
+  pointer-events: none;
+  animation: ch-curtain 0.7s ease 0.1s forwards;
+}
+
+@keyframes ch-curtain {
+  to { opacity: 0; visibility: hidden; }
+}
+
+.ch-game {
+  position: absolute;
+  inset: 0;
+  outline: none;
+  transition: opacity 0.4s ease, visibility 0s linear 0s;
+}
+
+.ch-game canvas {
+  display: block;
+}
+
+.ch-game:focus-visible canvas {
+  outline: 3px solid var(--ch-gold);
+  outline-offset: -3px;
+}
+
+/* ---------- HUD ---------- */
+
+.ch-hud,
+.ch-status,
+.ch-rotate {
+  /* Tinggi area game = tinggi layar (kanvas memenuhi layar). */
+  --gh: 100cqh;
+  --pad: max(6px, var(--gh) * 0.022);
+  --safe-t: max(var(--pad), env(safe-area-inset-top));
+  --safe-r: max(var(--pad) * 1.4, env(safe-area-inset-right));
+  --safe-l: max(var(--pad) * 1.4, env(safe-area-inset-left));
+}
+
+.ch-hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: clamp(11px, var(--gh) * 0.032, 17px);
+  opacity: 0;
+  transition: opacity 0.5s ease, visibility 0s linear 0s;
+}
+
+/* HUD muncul halus saat gameplay dimulai (setelah elemen intro menghilang). */
+.ch-hud.is-live { opacity: 1; }
+
+/* Label chapter singkat: kecil, di bawah petunjuk, hilang otomatis. */
+.ch-toast {
+  position: absolute;
+  top: calc(var(--safe-t) + var(--gh) * 0.17);
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 0.1em;
+  padding: 0.45em 1.2em 0.55em;
+  border: 2px solid var(--ch-gold);
+  border-radius: 0.9em;
+  background: linear-gradient(180deg, rgb(255 248 230 / 0.92), rgb(243 223 178 / 0.92));
+  box-shadow: 0 4px 12px rgb(40 22 6 / 0.25);
+  color: var(--ch-ink);
+  text-align: center;
+  translate: -50% 0;
+  animation: ch-toast-in 0.6s ease 0.3s backwards;
+}
+
+.ch-toast.is-leaving { animation: ch-hint-out 0.6s ease forwards; }
+
+.ch-toast-kicker {
+  color: #b5521a;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.ch-toast-title {
+  font-size: 1.25em;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.ch-toast-objective {
+  max-width: 26em;
+  font-size: 0.82em;
+  font-weight: 500;
+}
+
+@keyframes ch-toast-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+}
+
+.ch-top {
+  position: absolute;
+  top: var(--safe-t);
+  left: var(--safe-l);
+  right: var(--safe-r);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--pad);
+}
+
+/* Kiri atas: papan nama level. */
+.ch-level {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* sejajar dengan tombol menu */
+  margin: 0;
+  padding: 0.38em 0.9em 0.42em;
+  border: 2px solid var(--ch-gold-soft);
+  border-radius: 0.7em;
+  background: linear-gradient(180deg, #8f5a2c, var(--ch-wood) 55%, #6a3f1c);
+  box-shadow: inset 0 1px 0 rgb(255 226 170 / 0.35), 0 3px 8px rgb(30 15 4 / 0.35);
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ch-cream);
+  text-shadow: 0 1px 0 rgb(40 20 6 / 0.6);
+  white-space: nowrap;
+}
+
+.ch-level-kicker {
+  color: #ffd98a;
+}
+
+.ch-level-sep {
+  white-space: pre;
+}
+
+/* Tengah atas: petunjuk kontrol (parchment). */
+.ch-hint-slot {
+  display: flex;
+  justify-content: center;
+  max-width: min(50cqw, 34em);
+}
+
+.ch-hint {
+  margin: 0;
+  padding: 0.5em 1.1em 0.55em;
+  border: 2px solid var(--ch-gold);
+  border-radius: 0.8em;
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgb(255 250 235 / 0.9), transparent 60%),
+    linear-gradient(180deg, var(--ch-cream), var(--ch-cream-deep));
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.45), 0 4px 10px rgb(40 22 6 / 0.28);
+  color: var(--ch-ink);
+  font-size: 0.95em;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  animation: ch-hint-in 0.5s ease 0.25s backwards;
+}
+
+.ch-hint.is-leaving {
+  animation: ch-hint-out 0.4s ease forwards;
+}
+
+@keyframes ch-hint-in {
+  from { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes ch-hint-out {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+
+/* Tujuan chapter (menggantikan petunjuk kontrol di slot yang sama). */
+.ch-objective {
+  margin: 0;
+  padding: 0.4em 0.95em 0.45em;
+  border: 2px solid var(--ch-gold);
+  border-radius: 0.8em;
+  background: linear-gradient(180deg, rgb(248 236 208 / 0.94), rgb(236 214 166 / 0.94));
+  box-shadow: 0 3px 8px rgb(40 22 6 / 0.25);
+  color: var(--ch-ink);
+  font-size: 0.88em;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  animation: ch-hint-in 0.5s ease backwards;
+}
+
+.ch-objective-label {
+  display: inline-block;
+  margin-right: 0.3em;
+  padding: 0 0.55em 0.05em;
+  border-radius: 999px;
+  background: var(--ch-wood);
+  color: var(--ch-cream);
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Kanan atas: kembali ke menu. */
+.ch-back {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 44px;
+  padding: 0.35em 0.95em 0.38em 0.75em;
+  border: 2px solid var(--ch-gold-soft);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #8f5a2c, var(--ch-wood) 55%, #6a3f1c);
+  box-shadow: inset 0 1px 0 rgb(255 226 170 / 0.35), 0 3px 8px rgb(30 15 4 / 0.35);
+  color: var(--ch-cream);
+  font: inherit;
+  font-size: 0.95em;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.ch-back svg {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+}
+
+.ch-back:hover {
+  filter: brightness(1.12);
+}
+
+.ch-back:active {
+  transform: translateY(1px);
+}
+
+.ch-back:focus-visible {
+  outline: 3px solid #ffe3a0;
+  outline-offset: 2px;
+}
+
+/* Layar sempit (HP landscape): nama level dua baris agar petunjuk tetap di tengah. */
+@media (max-width: 899px) {
+  .ch-level {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .ch-level-kicker {
+    font-size: 0.82em;
+  }
+
+  .ch-level-sep {
+    display: none;
+  }
+}
+
+/* ---------- Tombol sentuh ---------- */
+/* Tombol diletakkan di bawah garis pijakan Malin (83% tinggi game), sehingga tidak menutupi
+   karakter di mana pun ia berdiri. */
+
+.ch-controls {
+  --size: clamp(48px, var(--gh) * 0.14, 76px);
+  --bottom: max(var(--gh) * 0.018, env(safe-area-inset-bottom) * 0.5);
+  position: absolute;
+  inset: auto var(--safe-r) var(--bottom) var(--safe-l);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.ch-controls-move {
+  display: flex;
+  gap: calc(var(--size) * 0.28);
+}
+
+.ch-pad {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 2px solid rgb(248 236 208 / 0.78);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, rgb(150 96 48 / 0.62), rgb(74 44 18 / 0.62));
+  box-shadow: inset 0 2px 0 rgb(255 230 180 / 0.3), 0 3px 8px rgb(20 10 2 / 0.3);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  color: var(--ch-cream);
+  font: inherit;
+  font-weight: 600;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  cursor: pointer;
+  transition: transform 0.08s ease, background-color 0.08s ease, border-color 0.08s ease;
+}
+
+/* Ikon tidak menjadi target sentuhan: capture dan pointerleave selalu milik tombol. */
+.ch-pad > * {
+  pointer-events: none;
+}
+
+.ch-pad svg {
+  width: 46%;
+  height: 46%;
+  flex: none;
+}
+
+.ch-pad:active {
+  transform: scale(0.94);
+  border-color: #ffe3a0;
+  background: radial-gradient(circle at 50% 30%, rgb(240 190 96 / 0.85), rgb(176 112 36 / 0.85));
+}
+
+.ch-pad:focus-visible {
+  outline: 3px solid #ffe3a0;
+  outline-offset: 3px;
+}
+
+.ch-pad--jump {
+  width: calc(var(--size) * 1.75);
+  border-radius: 999px;
+  font-size: max(13px, var(--size) * 0.27);
+}
+
+.ch-pad--jump svg {
+  width: calc(var(--size) * 0.42);
+  height: calc(var(--size) * 0.42);
+}
+
+/* ---------- Status muat / galat ---------- */
+
+.ch-status {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: var(--pad);
+  background: rgb(10 24 34 / 0.82);
+}
+
+.ch-status-card {
+  max-width: min(90cqw, 30em);
+  margin: 0;
+  padding: 0.8em 1.3em;
+  border: 2px solid var(--ch-gold);
+  border-radius: 0.9em;
+  background: linear-gradient(180deg, var(--ch-cream), var(--ch-cream-deep));
+  color: var(--ch-ink);
+  font-size: clamp(14px, var(--gh) * 0.04, 20px);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ---------- Penjaga orientasi (perangkat sentuh, portrait) ---------- */
+
+.ch-screen.is-blocked .ch-game,
+.ch-screen.is-blocked .ch-hud {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.ch-rotate {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  overflow: hidden;
+  background:
+    radial-gradient(90% 60% at 50% 38%, rgb(38 84 112 / 0.55), transparent 70%),
+    linear-gradient(180deg, #0c1f2e, #081520 70%, #0a1a24);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+}
+
+.ch-rotate.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.45s ease, visibility 0s linear 0s;
+}
+
+.ch-rotate-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  max-width: 22rem;
+  text-align: center;
+}
+
+.ch-rotate-phone {
+  width: min(42vw, 150px);
+  height: auto;
+  overflow: visible;
+}
+
+.ch-rotate-device {
+  fill: none;
+  stroke: var(--ch-cream);
+  stroke-width: 4;
+  transform-box: view-box;
+  transform-origin: 60px 62px;
+  animation: ch-rotate-device 2.8s ease-in-out infinite;
+}
+
+.ch-rotate-device circle {
+  fill: var(--ch-cream);
+  stroke: none;
+}
+
+.ch-rotate-screen {
+  fill: rgb(92 196 240 / 0.25);
+  stroke: none;
+}
+
+.ch-rotate-arc,
+.ch-rotate-arc-head {
+  fill: none;
+  stroke: var(--ch-gold);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes ch-rotate-device {
+  0%, 18% { transform: rotate(0deg); }
+  48%, 78% { transform: rotate(90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.ch-rotate-title {
+  margin: 0;
+  color: #ffe3a0;
+  font-size: clamp(24px, 7vw, 32px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.ch-rotate-text {
+  margin: 0;
+  color: rgb(248 236 208 / 0.88);
+  font-size: clamp(15px, 4.2vw, 18px);
+  line-height: 1.45;
+}
+
+/* Dekorasi sederhana: gelombang laut dan bintang. */
+.ch-rotate-wave {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 120px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: rgb(46 128 170 / 0.18);
+}
+
+.ch-rotate-wave--1 {
+  bottom: -64px;
+}
+
+.ch-rotate-wave--2 {
+  bottom: -88px;
+  left: -30%;
+  background: rgb(46 128 170 / 0.14);
+}
+
+.ch-rotate-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffe3a0;
+  opacity: 0.6;
+}
+
+.ch-rotate-star--1 { top: 12%; left: 18%; }
+.ch-rotate-star--2 { top: 20%; right: 16%; width: 3px; height: 3px; }
+.ch-rotate-star--3 { top: 8%; right: 38%; width: 5px; height: 5px; opacity: 0.45; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ch-hint,
+  .ch-hint.is-leaving,
+  .ch-objective,
+  .ch-toast,
+  .ch-toast.is-leaving,
+  .ch-screen--fade::after {
+    animation-duration: 0.01ms;
+    animation-delay: 0s;
+  }
+
+  .ch-rotate-device {
+    animation: none;
+    transform: rotate(90deg);
+  }
+
+  .ch-game,
+  .ch-hud,
+  .ch-rotate,
+  .ch-rotate.is-active {
+    transition-duration: 0.01ms;
+  }
+}

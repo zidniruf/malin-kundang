@@ -1,0 +1,204 @@
+{
+  "_generated": "art-source/tools/build_chapter1_world.py (jangan diedit manual)",
+  "scale": 1.1721611721611722,
+  "width": 7501.8,
+  "height": 848.6,
+  "floorY": 600,
+  "view": {
+    "top": 77.4,
+    "bottom": 847.5
+  },
+  "tiles": [
+    {
+      "key": "c1-world-0",
+      "url": "assets/chapter-1/world/world-0.webp",
+      "x": 0.0,
+      "width": 2052
+    },
+    {
+      "key": "c1-world-1",
+      "url": "assets/chapter-1/world/world-1.webp",
+      "x": 2400.6,
+      "width": 2052
+    },
+    {
+      "key": "c1-world-2",
+      "url": "assets/chapter-1/world/world-2.webp",
+      "x": 4801.2,
+      "width": 2052
+    },
+    {
+      "key": "c1-world-3",
+      "url": "assets/chapter-1/world/world-3.webp",
+      "x": 7201.8,
+      "width": 256
+    }
+  ],
+  "foliage": {},
+  "seams": [
+    {
+      "x": 1324.5,
+      "foliage": null,
+      "left": 1324.5,
+      "top": 0.0,
+      "scale": 1
+    },
+    {
+      "x": 2473.3,
+      "foliage": null,
+      "left": 2473.3,
+      "top": 0.0,
+      "scale": 1
+    },
+    {
+      "x": 3622.0,
+      "foliage": null,
+      "left": 3622.0,
+      "top": 0.0,
+      "scale": 1
+    },
+    {
+      "x": 5356.8,
+      "foliage": null,
+      "left": 5356.8,
+      "top": 0.0,
+      "scale": 1
+    },
+    {
+      "x": 6505.5,
+      "foliage": null,
+      "left": 6505.5,
+      "top": 0.0,
+      "scale": 1
+    }
+  ],
+  "areas": [
+    {
+      "id": "area-01-rumah-malin",
+      "name": "Rumah Malin",
+      "x0": 0,
+      "x1": 1324.5
+    },
+    {
+      "id": "area-02-dermaga-nelayan",
+      "name": "Dermaga Nelayan",
+      "x0": 1324.5,
+      "x1": 2473.3
+    },
+    {
+      "id": "area-03-dermaga-rusak",
+      "name": "Dermaga Rusak",
+      "x0": 2473.3,
+      "x1": 3622.0
+    },
+    {
+      "id": "area-04-jalan-kampung",
+      "name": "Jalan Kampung",
+      "x0": 3622.0,
+      "x1": 5356.8
+    },
+    {
+      "id": "area-05-pasar-ikan",
+      "name": "Pasar Ikan",
+      "x0": 5356.8,
+      "x1": 6505.5
+    },
+    {
+      "id": "area-06-pelabuhan",
+      "name": "Pelabuhan",
+      "x0": 6505.5,
+      "x1": 7501.8
+    }
+  ],
+  "floors": [
+    {
+      "x0": 562.6,
+      "x1": 1500.4,
+      "y": 600.1
+    },
+    {
+      "x0": 1148.7,
+      "x1": 2444.0,
+      "y": 600.1
+    },
+    {
+      "x0": 2297.4,
+      "x1": 2590.5,
+      "y": 600.1
+    },
+    {
+      "x0": 3563.4,
+      "x1": 5532.6,
+      "y": 600.1
+    },
+    {
+      "x0": 5181.0,
+      "x1": 6681.3,
+      "y": 600.1
+    },
+    {
+      "x0": 6329.7,
+      "x1": 7501.8,
+      "y": 600.1
+    }
+  ],
+  "platforms": [
+    {
+      "x0": 199.3,
+      "x1": 562.6,
+      "y": 561.5
+    },
+    {
+      "x0": 2578.8,
+      "x1": 2690.1,
+      "y": 575.5
+    },
+    {
+      "x0": 2684.2,
+      "x1": 3000.7,
+      "y": 552.1
+    },
+    {
+      "x0": 2998.4,
+      "x1": 3047.6,
+      "y": 591.9
+    },
+    {
+      "x0": 3042.9,
+      "x1": 3094.5,
+      "y": 565.0
+    },
+    {
+      "x0": 3106.2,
+      "x1": 3159.0,
+      "y": 550.9
+    },
+    {
+      "x0": 3159.0,
+      "x1": 3209.4,
+      "y": 522.8
+    },
+    {
+      "x0": 3264.5,
+      "x1": 3680.6,
+      "y": 540.4
+    },
+    {
+      "x0": 6895.8,
+      "x1": 7007.2,
+      "y": 550.9
+    },
+    {
+      "x0": 6931.0,
+      "x1": 7042.3,
+      "y": 511.1
+    },
+    {
+      "x0": 7018.9,
+      "x1": 7423.3,
+      "y": 463.0
+    }
+  ],
+  "walkLeft": 199.3,
+  "walkRight": 7490.1
+}

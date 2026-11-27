@@ -1,0 +1,406 @@
+/* Overlay cinematic di atas scene Main Menu: letterbox, partikel, narasi, iris wipe,
+   shot Chapter 1 (layer Level 1), dan tombol. Dunia & Malin milik MainMenu.css. */
+
+.oc {
+  --oc-font: 'Fredoka', 'Baloo 2', 'Nunito', 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif;
+  --oc-wood: #5b3516;
+  --oc-orange: #ff8c2e;
+  --oc-orange-dark: #c4561a;
+  --oc-night: #071c27;
+  --oc-pop: cubic-bezier(0.2, 1.4, 0.4, 1);
+  --bar: clamp(16px, 7.5vh, 84px);
+
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  pointer-events: none;
+  font-family: var(--oc-font);
+  color: #fff6e2;
+}
+
+.oc button { pointer-events: auto; }
+.oc img { display: block; -webkit-user-drag: none; }
+
+/* ---------- Babak 1: shot transisi teluk (01) → dermaga (02) ---------- */
+/* Ukuran dan transform setiap layer ditulis oleh jam cinematic (TransitionShots.jsx). */
+
+.oc-shots,
+.oc-shot {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.oc-shot { will-change: opacity; }
+
+.oc-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+.oc-shot-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.oc-shot-bg { position: absolute; inset: 0; height: 100% !important; }
+
+.oc-shot-layer {
+  position: absolute;
+  will-change: transform;
+}
+
+/* Awan dinaikkan dan bagian bawahnya dipudarkan agar kampung dan cakrawala tetap terlihat. */
+.oc-shot-clouds {
+  left: -15%;
+  top: 0;
+  width: 130%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 60%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 60%);
+}
+
+.oc-shot-clouds--pier {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 52%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 52%);
+}
+
+/* Ombak dinaikkan sedikit dan tepi atasnya dipudarkan agar menyatu dengan laut di latar
+   (tanpa garis puncak ombak yang keras melintang di tengah teluk). */
+.oc-shot-waves {
+  left: -5%;
+  bottom: 2%;
+  width: 110%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 62%, #000 78%);
+  mask-image: linear-gradient(to bottom, transparent 0%, transparent 62%, #000 78%);
+}
+
+.oc-shot-bgwrap {
+  position: absolute;
+  inset: 0;
+  transform: scale(var(--bg-scale, 1));
+  transform-origin: 50% 42%;
+}
+
+.oc-shot-ship {
+  position: absolute;
+  left: 0;
+  top: 0;
+  translate: 0 calc(var(--ship-origin) * -1);
+  transform-origin: 50% var(--ship-origin);
+}
+
+.oc-shot-foliage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+
+/* ---------- Babak 2: kampung dermaga (canvas Phaser, OpeningVillageScene) ---------- */
+
+.oc-village {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.oc-village.is-visible { opacity: 1; }
+.oc-village canvas { display: block; }
+
+/* ---------- Partikel cahaya & daun ---------- */
+
+.oc-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  animation: oc-fade 2.4s ease 1s backwards;
+}
+
+.oc-mote {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 253 235 / 0.95) 0%, rgb(255 236 170 / 0.5) 45%, transparent 70%);
+  animation: oc-mote var(--dur) linear var(--delay) infinite;
+}
+
+@keyframes oc-mote {
+  0% { opacity: 0; transform: translate(0, 0); }
+  15% { opacity: 0.9; }
+  50% { transform: translate(var(--drift), -70px); }
+  85% { opacity: 0.7; }
+  100% { opacity: 0; transform: translate(calc(var(--drift) * -0.5), -150px); }
+}
+
+.oc-leaf {
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 9px;
+  border-radius: 0 100% 0 100%;
+  background: linear-gradient(135deg, hsl(var(--hue) 60% 52%), hsl(var(--hue) 55% 32%));
+  opacity: 0.9;
+  animation: oc-leaf var(--dur) linear var(--delay) infinite;
+}
+
+@keyframes oc-leaf {
+  0% { transform: translate(108vw, 0) rotate(0deg) scale(var(--scale)); }
+  25% { transform: translate(78vw, 5vh) rotate(160deg) scale(var(--scale)); }
+  50% { transform: translate(48vw, -2vh) rotate(330deg) scale(var(--scale)); }
+  75% { transform: translate(18vw, 6vh) rotate(500deg) scale(var(--scale)); }
+  100% { transform: translate(-12vw, 2vh) rotate(700deg) scale(var(--scale)); }
+}
+
+@keyframes oc-fade {
+  from { opacity: 0; }
+}
+
+/* ---------- Letterbox & iris wipe ---------- */
+
+.oc-letterbox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--bar);
+  background: var(--oc-night);
+  transition: transform 1.4s cubic-bezier(0.65, 0, 0.2, 1);
+}
+
+.oc-letterbox--top { top: 0; animation: oc-bar-top 1.6s cubic-bezier(0.65, 0, 0.2, 1) 0.4s backwards; }
+.oc-letterbox--bottom { bottom: 0; animation: oc-bar-bottom 1.6s cubic-bezier(0.65, 0, 0.2, 1) 0.4s backwards; }
+
+@keyframes oc-bar-top { from { transform: translateY(-100%); } }
+@keyframes oc-bar-bottom { from { transform: translateY(100%); } }
+
+/* Akhir intro: letterbox ditarik keluar dan partikel memudar saat kamera menuju framing gameplay. */
+.oc[data-cue='lepas'] .oc-letterbox--top,
+.oc[data-cue='outro'] .oc-letterbox--top { transform: translateY(-100%); }
+
+.oc[data-cue='lepas'] .oc-letterbox--bottom,
+.oc[data-cue='outro'] .oc-letterbox--bottom { transform: translateY(100%); }
+
+.oc-particles { transition: opacity 1.2s ease; }
+
+.oc[data-cue='lepas'] .oc-particles,
+.oc[data-cue='outro'] .oc-particles { opacity: 0; }
+
+.oc-dim {
+  position: absolute;
+  inset: 0;
+  background: var(--oc-night);
+  opacity: var(--dim-o, 0);
+}
+
+/* ---------- Narasi ---------- */
+
+.oc-narration-slot {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--bar) + clamp(12px, 3vh, 36px));
+  width: min(900px, 90vw);
+  transform: translateX(-50%);
+}
+
+.oc-narration {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(14px, 2.4vh, 26px) clamp(18px, 3vw, 42px);
+  text-align: center;
+}
+
+.oc-narration::before {
+  content: '';
+  position: absolute;
+  inset: -20% -8%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgb(6 36 52 / 0.62) 0%, rgb(6 36 52 / 0.4) 45%, transparent 72%);
+  animation: oc-fade 0.8s ease both;
+}
+
+.oc-narration-text {
+  margin: 0;
+  font-size: clamp(1.05rem, 0.75rem + 1.15vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.38;
+  color: #fff8e8;
+  text-shadow: 0 2px 0 rgb(6 36 52 / 0.55), 0 4px 16px rgb(0 0 0 / 0.35);
+  text-wrap: balance;
+}
+
+.oc-word {
+  display: inline-block;
+  white-space: pre;
+  animation: oc-word 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--w) * 55ms + 150ms);
+}
+
+@keyframes oc-word {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+}
+
+.oc-next {
+  align-self: flex-end;
+  padding: 0.3em 1em;
+  border: 2px solid rgb(255 255 255 / 0.75);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+  font-family: var(--oc-font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  animation: oc-fade 0.6s ease 1.4s both;
+  transition: background 0.2s ease, transform 0.2s var(--oc-pop);
+}
+
+.oc-next:hover { background: rgb(255 255 255 / 0.28); transform: translateX(3px); }
+.oc-next:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* ---------- Dialog Ibu & Malin (kotak parchment dengan nama pembicara) ---------- */
+
+.oc-dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(640px, 100%);
+  margin-inline: auto;
+  padding: clamp(18px, 2.6vh, 26px) clamp(18px, 2.6vw, 30px) clamp(10px, 1.6vh, 16px);
+  border: 3px solid #e0ac4a;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff8e6 0%, #f3dfb2 100%);
+  box-shadow: 0 5px 0 #b98545, 0 16px 34px rgb(6 36 52 / 0.35);
+  color: #4a2c12;
+  animation: oc-dialog-in 0.5s var(--oc-pop) both;
+}
+
+.oc-dialog-speaker {
+  position: absolute;
+  top: 0;
+  left: clamp(16px, 2.4vw, 28px);
+  translate: 0 -55%;
+  padding: 0.18em 0.9em 0.22em;
+  border: 2px solid #ffe3a0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #8f5a2c, #6a3f1c);
+  color: #fff3d6;
+  font-size: clamp(0.85rem, 0.7rem + 0.4vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.oc-dialog--malin .oc-dialog-speaker {
+  left: auto;
+  right: clamp(16px, 2.4vw, 28px);
+  background: linear-gradient(180deg, #d0601b, #a8460f);
+}
+
+.oc-dialog-text {
+  margin: 0;
+  font-size: clamp(1.05rem, 0.8rem + 1vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.oc-dialog .oc-next {
+  border-color: #c98d4c;
+  background: rgb(201 141 76 / 0.15);
+  color: #6a3f1c;
+}
+
+.oc-dialog .oc-next:hover { background: rgb(201 141 76 / 0.3); }
+.oc-dialog .oc-next:focus-visible { outline-color: #6a3f1c; }
+
+/* Layar pendek (HP landscape): kotak dialog lebih padat agar karakter tetap terlihat. */
+@media (max-height: 520px) {
+  .oc-dialog {
+    gap: 2px;
+    padding: 14px 16px 6px;
+    border-width: 2px;
+  }
+
+  .oc-dialog-text { font-size: clamp(0.95rem, 0.7rem + 1vw, 1.15rem); }
+  .oc-dialog .oc-next { padding-block: 0.15em; font-size: 0.85rem; }
+}
+
+@keyframes oc-dialog-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+}
+
+/* Narasi memudar sendiri setelah waktu baca (--hold), tidak menumpuk sampai cue berikutnya. */
+.oc-narration {
+  animation: oc-narration-out 0.7s ease var(--hold, 6s) forwards;
+}
+
+@keyframes oc-narration-out {
+  to { opacity: 0; visibility: hidden; transform: translateY(-6px); }
+}
+
+/* ---------- Skip ---------- */
+
+.oc-skip {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top), calc((var(--bar) - 38px) / 2));
+  right: max(14px, env(safe-area-inset-right));
+  padding: 0.4em 1.1em;
+  border: 2px solid rgb(255 255 255 / 0.7);
+  border-radius: 999px;
+  background: rgb(7 28 39 / 0.45);
+  color: #fff;
+  font-family: var(--oc-font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  animation: oc-fade 0.8s ease 0.6s backwards;
+  transition: background 0.2s ease;
+}
+
+.oc-skip:hover { background: rgb(7 28 39 / 0.75); }
+.oc-skip:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* ---------- Responsif ---------- */
+
+/* Landscape lebar: narasi di kiri-tengah agar tidak menutupi Malin di kanan. */
+@media (min-aspect-ratio: 4/3) {
+  .oc-narration-slot { left: 38%; width: min(720px, 56vw); }
+}
+
+@media (orientation: portrait) {
+  .oc { --bar: clamp(14px, 6vh, 60px); }
+  .oc-narration-slot { width: 94vw; }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .oc { --bar: 12px; }
+  .oc-narration { padding-block: 8px; gap: 6px; }
+  .oc-narration-text { font-size: clamp(0.95rem, 0.7rem + 1vw, 1.2rem); }
+}
+
+/* Kurangi gerakan: kamera diam (diatur JS), animasi dekoratif dimatikan. */
+@media (prefers-reduced-motion: reduce) {
+  .oc *,
+  .oc *::before,
+  .oc *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+  }
+
+  .oc-particles { display: none; }
+}

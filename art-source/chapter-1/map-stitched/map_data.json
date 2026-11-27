@@ -1,0 +1,230 @@
+{
+  "peta": "Chapter 1 - Kampung Nelayan (6 area digabung)",
+  "dibuat_oleh": "art-source/tools/stitch_chapter1_map.py (jangan edit manual)",
+  "tinggi": 720,
+  "lebar_total": 6340,
+  "cara_menyambung": "Letakkan bagian 1, 2, 3 berurutan pada x_di_peta_gabungan; hasilnya identik piksel-per-piksel dengan map_full.png.",
+  "catatan_koordinat": "Semua x/y dalam piksel peta gabungan (asli, tanpa skala). ground_y = permukaan papan tempat kaki karakter berdiri.",
+  "bagian": [
+    {
+      "file": "map_bagian_1.png",
+      "lebar": 2020,
+      "tinggi": 720,
+      "x_di_peta_gabungan": 0
+    },
+    {
+      "file": "map_bagian_2.png",
+      "lebar": 2340,
+      "tinggi": 720,
+      "x_di_peta_gabungan": 2020
+    },
+    {
+      "file": "map_bagian_3.png",
+      "lebar": 1980,
+      "tinggi": 720,
+      "x_di_peta_gabungan": 4360
+    }
+  ],
+  "area": [
+    {
+      "id": 1,
+      "nama": "Rumah Malin",
+      "sumber": "area-01-rumah-malin.png",
+      "x_mulai": 0,
+      "x_akhir": 1100,
+      "ground_y": 481,
+      "geser_vertikal_px": 0,
+      "catatan": "Halaman rumah (jalan setapak) sedikit lebih tinggi: y 448, x 170-480."
+    },
+    {
+      "id": 2,
+      "nama": "Dermaga Nelayan",
+      "sumber": "area-02-dermaga-nelayan.png",
+      "x_mulai": 1100,
+      "x_akhir": 2020,
+      "ground_y": 481,
+      "geser_vertikal_px": 10
+    },
+    {
+      "id": 3,
+      "nama": "Dermaga Rusak",
+      "sumber": "area-03-dermaga-rusak.png",
+      "x_mulai": 2020,
+      "x_akhir": 2940,
+      "ground_y": 440,
+      "geser_vertikal_px": 35,
+      "catatan": "Dermaga bertingkat: jalan naik dari dek Area 2 (y 481) ke dek atas (y 440); dek kanan y 430; lihat dermaga_rusak.pijakan."
+    },
+    {
+      "id": 4,
+      "nama": "Jalan Kampung",
+      "sumber": "area-04-jalan-kampung.png",
+      "x_mulai": 2940,
+      "x_akhir": 4360,
+      "ground_y": 481,
+      "geser_vertikal_px": -28,
+      "crop_sumber_x": [
+        380,
+        2160
+      ]
+    },
+    {
+      "id": 5,
+      "nama": "Pasar Ikan",
+      "sumber": "area-05-pasar-ikan.png",
+      "x_mulai": 4360,
+      "x_akhir": 5260,
+      "ground_y": 481,
+      "geser_vertikal_px": -9
+    },
+    {
+      "id": 6,
+      "nama": "Pelabuhan",
+      "sumber": "area-06-pelabuhan.png",
+      "x_mulai": 5260,
+      "x_akhir": 6340,
+      "ground_y": 481,
+      "geser_vertikal_px": 7
+    }
+  ],
+  "sambungan": [
+    {
+      "antara": [
+        1,
+        2
+      ],
+      "zona_x": [
+        920,
+        1280
+      ],
+      "overlap": 360,
+      "titik_tengah_x": 1100
+    },
+    {
+      "antara": [
+        2,
+        3
+      ],
+      "zona_x": [
+        1840,
+        2200
+      ],
+      "overlap": 360,
+      "titik_tengah_x": 2020
+    },
+    {
+      "antara": [
+        3,
+        4
+      ],
+      "zona_x": [
+        2760,
+        3120
+      ],
+      "overlap": 360,
+      "titik_tengah_x": 2940
+    },
+    {
+      "antara": [
+        4,
+        5
+      ],
+      "zona_x": [
+        4180,
+        4540
+      ],
+      "overlap": 360,
+      "titik_tengah_x": 4360
+    },
+    {
+      "antara": [
+        5,
+        6
+      ],
+      "zona_x": [
+        5060,
+        5460
+      ],
+      "overlap": 400,
+      "titik_tengah_x": 5260
+    }
+  ],
+  "dermaga_rusak": {
+    "lubang": [
+      {
+        "id": 1,
+        "x_mulai": 2180,
+        "x_akhir": 2277,
+        "lebar": 97,
+        "tipe": "jatuh_ke_air"
+      },
+      {
+        "id": 2,
+        "x_mulai": 2437,
+        "x_akhir": 2665,
+        "lebar": 228,
+        "tipe": "jatuh_ke_air"
+      },
+      {
+        "id": 3,
+        "x_mulai": 2770,
+        "x_akhir": 2955,
+        "lebar": 185,
+        "tipe": "jatuh_ke_air"
+      }
+    ],
+    "pijakan_di_lubang_2": [
+      {
+        "x_mulai": 2438,
+        "x_akhir": 2480,
+        "y_atas": 474,
+        "tipe": "tunggul_tiang"
+      },
+      {
+        "x_mulai": 2476,
+        "x_akhir": 2520,
+        "y_atas": 451,
+        "tipe": "tunggul_tiang"
+      },
+      {
+        "x_mulai": 2530,
+        "x_akhir": 2575,
+        "y_atas": 439,
+        "tipe": "tunggul_tiang"
+      },
+      {
+        "x_mulai": 2575,
+        "x_akhir": 2618,
+        "y_atas": 415,
+        "tipe": "tunggul_tiang"
+      }
+    ],
+    "pijakan_utama_lubang_2": {
+      "x_mulai": 2530,
+      "x_akhir": 2575,
+      "y_atas": 439
+    },
+    "pijakan": [
+      {
+        "x_mulai": 2170,
+        "x_akhir": 2180,
+        "y_atas": 440
+      },
+      {
+        "x_mulai": 2277,
+        "x_akhir": 2437,
+        "y_atas": 440
+      },
+      {
+        "x_mulai": 2665,
+        "x_akhir": 2770,
+        "y_atas": 430
+      }
+    ],
+    "dek_sesudah_lubang_3": {
+      "x_mulai": 2955,
+      "y_atas": 481
+    },
+    "air_y": 535
+  }
+}

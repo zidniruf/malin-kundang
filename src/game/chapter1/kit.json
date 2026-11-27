@@ -1,0 +1,1114 @@
+{
+ "_generated": "art-source/tools/build_chapter1_kit.py (jangan diedit manual)",
+ "pieces": {
+  "ground-grass": {
+   "url": "assets/chapter-1/kit/ground-grass.webp",
+   "texW": 737,
+   "texH": 118,
+   "scale": 1.0,
+   "w": 737.0,
+   "h": 118.0,
+   "surface": 52.0
+  },
+  "ground-grass-flower": {
+   "url": "assets/chapter-1/kit/ground-grass-flower.webp",
+   "texW": 736,
+   "texH": 117,
+   "scale": 1.0,
+   "w": 736.0,
+   "h": 117.0,
+   "surface": 52.0
+  },
+  "ground-sand": {
+   "url": "assets/chapter-1/kit/ground-sand.webp",
+   "texW": 739,
+   "texH": 119,
+   "scale": 1.0,
+   "w": 739.0,
+   "h": 119.0,
+   "surface": 55.0
+  },
+  "ground-rocky": {
+   "url": "assets/chapter-1/kit/ground-rocky.webp",
+   "texW": 737,
+   "texH": 119,
+   "scale": 1.0,
+   "w": 737.0,
+   "h": 119.0,
+   "surface": 60.0
+  },
+  "ground-dirt": {
+   "url": "assets/chapter-1/kit/ground-dirt.webp",
+   "texW": 749,
+   "texH": 129,
+   "scale": 1.0,
+   "w": 749.0,
+   "h": 129.0,
+   "surface": 55.0
+  },
+  "bank-slope-down": {
+   "url": "assets/chapter-1/kit/bank-slope-down.webp",
+   "texW": 309,
+   "texH": 132,
+   "scale": 1.0,
+   "w": 309.0,
+   "h": 132.0
+  },
+  "bank-slope-up": {
+   "url": "assets/chapter-1/kit/bank-slope-up.webp",
+   "texW": 282,
+   "texH": 132,
+   "scale": 1.0,
+   "w": 282.0,
+   "h": 132.0
+  },
+  "block-grass": {
+   "url": "assets/chapter-1/kit/block-grass.webp",
+   "texW": 473,
+   "texH": 143,
+   "scale": 1.0,
+   "w": 473.0,
+   "h": 143.0,
+   "surface": 45.0
+  },
+  "block-grass-flower": {
+   "url": "assets/chapter-1/kit/block-grass-flower.webp",
+   "texW": 477,
+   "texH": 156,
+   "scale": 1.0,
+   "w": 477.0,
+   "h": 156.0,
+   "surface": 58.0
+  },
+  "block-sand": {
+   "url": "assets/chapter-1/kit/block-sand.webp",
+   "texW": 480,
+   "texH": 152,
+   "scale": 1.0,
+   "w": 480.0,
+   "h": 152.0,
+   "surface": 55.0
+  },
+  "block-rock": {
+   "url": "assets/chapter-1/kit/block-rock.webp",
+   "texW": 526,
+   "texH": 191,
+   "scale": 1.0,
+   "w": 526.0,
+   "h": 191.0,
+   "surface": 60.0
+  },
+  "block-dirt": {
+   "url": "assets/chapter-1/kit/block-dirt.webp",
+   "texW": 460,
+   "texH": 183,
+   "scale": 1.0,
+   "w": 460.0,
+   "h": 183.0,
+   "surface": 60.0
+  },
+  "pillar-rock-a": {
+   "url": "assets/chapter-1/kit/pillar-rock-a.webp",
+   "texW": 221,
+   "texH": 274,
+   "scale": 0.8,
+   "w": 176.8,
+   "h": 219.2,
+   "surface": 44.0
+  },
+  "pillar-rock-b": {
+   "url": "assets/chapter-1/kit/pillar-rock-b.webp",
+   "texW": 218,
+   "texH": 275,
+   "scale": 0.8,
+   "w": 174.4,
+   "h": 220.0,
+   "surface": 44.0
+  },
+  "dock-long": {
+   "url": "assets/chapter-1/kit/dock-long.webp",
+   "texW": 775,
+   "texH": 221,
+   "scale": 1.0,
+   "w": 775.0,
+   "h": 221.0,
+   "surface": 50.0
+  },
+  "dock-mid": {
+   "url": "assets/chapter-1/kit/dock-mid.webp",
+   "texW": 660,
+   "texH": 221,
+   "scale": 1.0,
+   "w": 660.0,
+   "h": 221.0,
+   "surface": 55.0
+  },
+  "dock-short": {
+   "url": "assets/chapter-1/kit/dock-short.webp",
+   "texW": 412,
+   "texH": 218,
+   "scale": 1.0,
+   "w": 412.0,
+   "h": 218.0,
+   "surface": 50.0
+  },
+  "dock-rope": {
+   "url": "assets/chapter-1/kit/dock-rope.webp",
+   "texW": 424,
+   "texH": 225,
+   "scale": 1.0,
+   "w": 424.0,
+   "h": 225.0,
+   "surface": 75.0
+  },
+  "dock-lantern": {
+   "url": "assets/chapter-1/kit/dock-lantern.webp",
+   "texW": 349,
+   "texH": 241,
+   "scale": 1.0,
+   "w": 349.0,
+   "h": 241.0,
+   "surface": 105.0
+  },
+  "dock-plank-a": {
+   "url": "assets/chapter-1/kit/dock-plank-a.webp",
+   "texW": 516,
+   "texH": 267,
+   "scale": 1.0,
+   "w": 516.0,
+   "h": 267.0,
+   "surface": 50.0
+  },
+  "dock-plank-b": {
+   "url": "assets/chapter-1/kit/dock-plank-b.webp",
+   "texW": 591,
+   "texH": 248,
+   "scale": 1.0,
+   "w": 591.0,
+   "h": 248.0,
+   "surface": 45.0
+  },
+  "dock-plank-small": {
+   "url": "assets/chapter-1/kit/dock-plank-small.webp",
+   "texW": 304,
+   "texH": 251,
+   "scale": 1.0,
+   "w": 304.0,
+   "h": 251.0,
+   "surface": 62.0
+  },
+  "dock-corner": {
+   "url": "assets/chapter-1/kit/dock-corner.webp",
+   "texW": 368,
+   "texH": 287,
+   "scale": 0.79891,
+   "w": 294.0,
+   "h": 229.8,
+   "surface": 45.0
+  },
+  "pier-post": {
+   "url": "assets/chapter-1/kit/pier-post.webp",
+   "texW": 76,
+   "texH": 296,
+   "scale": 0.79737,
+   "w": 60.6,
+   "h": 236.4,
+   "surface": 10.8
+  },
+  "pier-post-rope": {
+   "url": "assets/chapter-1/kit/pier-post-rope.webp",
+   "texW": 74,
+   "texH": 296,
+   "scale": 0.79459,
+   "w": 58.8,
+   "h": 236.4,
+   "surface": 10.8
+  },
+  "dock-rail": {
+   "url": "assets/chapter-1/kit/dock-rail.webp",
+   "texW": 429,
+   "texH": 143,
+   "scale": 0.7993,
+   "w": 342.9,
+   "h": 114.8
+  },
+  "dock-stairs": {
+   "url": "assets/chapter-1/kit/dock-stairs.webp",
+   "texW": 453,
+   "texH": 282,
+   "scale": 0.80011,
+   "w": 362.5,
+   "h": 225.5
+  },
+  "rope-ladder": {
+   "url": "assets/chapter-1/kit/rope-ladder.webp",
+   "texW": 190,
+   "texH": 270,
+   "scale": 0.8,
+   "w": 152.0,
+   "h": 216.0
+  },
+  "house-gadang-a": {
+   "url": "assets/chapter-1/kit/house-gadang-a.webp",
+   "texW": 769,
+   "texH": 616,
+   "scale": 0.80036,
+   "w": 615.5,
+   "h": 493.1
+  },
+  "house-gadang-b": {
+   "url": "assets/chapter-1/kit/house-gadang-b.webp",
+   "texW": 812,
+   "texH": 601,
+   "scale": 0.7999,
+   "w": 649.5,
+   "h": 480.7
+  },
+  "house-gadang-c": {
+   "url": "assets/chapter-1/kit/house-gadang-c.webp",
+   "texW": 676,
+   "texH": 622,
+   "scale": 0.80059,
+   "w": 541.2,
+   "h": 497.2
+  },
+  "house-gadang-long": {
+   "url": "assets/chapter-1/kit/house-gadang-long.webp",
+   "texW": 830,
+   "texH": 585,
+   "scale": 0.79973,
+   "w": 663.8,
+   "h": 468.3
+  },
+  "hut-thatch": {
+   "url": "assets/chapter-1/kit/hut-thatch.webp",
+   "texW": 536,
+   "texH": 608,
+   "scale": 0.79925,
+   "w": 428.4,
+   "h": 486.0
+  },
+  "hut-fisher": {
+   "url": "assets/chapter-1/kit/hut-fisher.webp",
+   "texW": 526,
+   "texH": 643,
+   "scale": 0.79973,
+   "w": 420.7,
+   "h": 514.1
+  },
+  "rangkiang": {
+   "url": "assets/chapter-1/kit/rangkiang.webp",
+   "texW": 362,
+   "texH": 552,
+   "scale": 0.79972,
+   "w": 289.5,
+   "h": 441.6
+  },
+  "pavilion-a": {
+   "url": "assets/chapter-1/kit/pavilion-a.webp",
+   "texW": 502,
+   "texH": 426,
+   "scale": 0.79936,
+   "w": 401.3,
+   "h": 340.5
+  },
+  "pavilion-b": {
+   "url": "assets/chapter-1/kit/pavilion-b.webp",
+   "texW": 546,
+   "texH": 423,
+   "scale": 0.80059,
+   "w": 437.1,
+   "h": 338.6
+  },
+  "ship-sail": {
+   "url": "assets/chapter-1/kit/ship-sail.webp",
+   "texW": 887,
+   "texH": 612,
+   "scale": 0.8,
+   "w": 709.6,
+   "h": 489.6
+  },
+  "boat-fishing": {
+   "url": "assets/chapter-1/kit/boat-fishing.webp",
+   "texW": 514,
+   "texH": 284,
+   "scale": 0.79961,
+   "w": 411.0,
+   "h": 227.5
+  },
+  "boat-row": {
+   "url": "assets/chapter-1/kit/boat-row.webp",
+   "texW": 400,
+   "texH": 97,
+   "scale": 0.8001,
+   "w": 320.0,
+   "h": 77.7
+  },
+  "boat-canoe": {
+   "url": "assets/chapter-1/kit/boat-canoe.webp",
+   "texW": 423,
+   "texH": 72,
+   "scale": 0.80028,
+   "w": 338.5,
+   "h": 58.0
+  },
+  "net-stand": {
+   "url": "assets/chapter-1/kit/net-stand.webp",
+   "texW": 197,
+   "texH": 161,
+   "scale": 0.79949,
+   "w": 157.5,
+   "h": 129.0
+  },
+  "barrels": {
+   "url": "assets/chapter-1/kit/barrels.webp",
+   "texW": 109,
+   "texH": 97,
+   "scale": 0.79853,
+   "w": 87.0,
+   "h": 77.8
+  },
+  "fish-traps": {
+   "url": "assets/chapter-1/kit/fish-traps.webp",
+   "texW": 126,
+   "texH": 99,
+   "scale": 0.80254,
+   "w": 101.1,
+   "h": 79.0
+  },
+  "basket-fish": {
+   "url": "assets/chapter-1/kit/basket-fish.webp",
+   "texW": 89,
+   "texH": 72,
+   "scale": 0.79753,
+   "w": 71.0,
+   "h": 57.2
+  },
+  "rope-coil": {
+   "url": "assets/chapter-1/kit/rope-coil.webp",
+   "texW": 74,
+   "texH": 59,
+   "scale": 0.79784,
+   "w": 59.0,
+   "h": 47.5
+  },
+  "sacks": {
+   "url": "assets/chapter-1/kit/sacks.webp",
+   "texW": 105,
+   "texH": 90,
+   "scale": 0.8,
+   "w": 84.0,
+   "h": 71.7
+  },
+  "floats": {
+   "url": "assets/chapter-1/kit/floats.webp",
+   "texW": 83,
+   "texH": 72,
+   "scale": 0.80193,
+   "w": 66.6,
+   "h": 58.0
+  },
+  "anchor": {
+   "url": "assets/chapter-1/kit/anchor.webp",
+   "texW": 98,
+   "texH": 105,
+   "scale": 0.79796,
+   "w": 78.2,
+   "h": 84.3
+  },
+  "drying-rack": {
+   "url": "assets/chapter-1/kit/drying-rack.webp",
+   "texW": 220,
+   "texH": 134,
+   "scale": 0.8,
+   "w": 176.0,
+   "h": 107.0
+  },
+  "crates": {
+   "url": "assets/chapter-1/kit/crates.webp",
+   "texW": 103,
+   "texH": 92,
+   "scale": 0.80155,
+   "w": 82.6,
+   "h": 73.6
+  },
+  "oars": {
+   "url": "assets/chapter-1/kit/oars.webp",
+   "texW": 108,
+   "texH": 116,
+   "scale": 0.8,
+   "w": 86.4,
+   "h": 92.9
+  },
+  "trap-tube": {
+   "url": "assets/chapter-1/kit/trap-tube.webp",
+   "texW": 104,
+   "texH": 64,
+   "scale": 0.8,
+   "w": 83.2,
+   "h": 51.2
+  },
+  "fish-tray": {
+   "url": "assets/chapter-1/kit/fish-tray.webp",
+   "texW": 98,
+   "texH": 56,
+   "scale": 0.80082,
+   "w": 78.5,
+   "h": 44.4
+  },
+  "lantern": {
+   "url": "assets/chapter-1/kit/lantern.webp",
+   "texW": 52,
+   "texH": 70,
+   "scale": 0.80769,
+   "w": 42.0,
+   "h": 55.9
+  },
+  "flag": {
+   "url": "assets/chapter-1/kit/flag.webp",
+   "texW": 124,
+   "texH": 121,
+   "scale": 0.79677,
+   "w": 98.8,
+   "h": 96.8
+  },
+  "flower-basket": {
+   "url": "assets/chapter-1/kit/flower-basket.webp",
+   "texW": 96,
+   "texH": 95,
+   "scale": 0.79625,
+   "w": 76.4,
+   "h": 75.9
+  },
+  "cloth-rack": {
+   "url": "assets/chapter-1/kit/cloth-rack.webp",
+   "texW": 148,
+   "texH": 93,
+   "scale": 0.8027,
+   "w": 118.8,
+   "h": 74.5
+  },
+  "buoys": {
+   "url": "assets/chapter-1/kit/buoys.webp",
+   "texW": 75,
+   "texH": 81,
+   "scale": 0.79733,
+   "w": 59.8,
+   "h": 64.7
+  },
+  "mats": {
+   "url": "assets/chapter-1/kit/mats.webp",
+   "texW": 102,
+   "texH": 68,
+   "scale": 0.80294,
+   "w": 81.9,
+   "h": 54.6
+  },
+  "pot": {
+   "url": "assets/chapter-1/kit/pot.webp",
+   "texW": 68,
+   "texH": 70,
+   "scale": 0.80471,
+   "w": 54.7,
+   "h": 55.7
+  },
+  "stall-thatch": {
+   "url": "assets/chapter-1/kit/stall-thatch.webp",
+   "texW": 504,
+   "texH": 285,
+   "scale": 0.8,
+   "w": 403.2,
+   "h": 228.0
+  },
+  "stall-canopy": {
+   "url": "assets/chapter-1/kit/stall-canopy.webp",
+   "texW": 446,
+   "texH": 274,
+   "scale": 0.7991,
+   "w": 356.4,
+   "h": 219.0
+  },
+  "fish-rack-tall": {
+   "url": "assets/chapter-1/kit/fish-rack-tall.webp",
+   "texW": 255,
+   "texH": 220,
+   "scale": 0.8,
+   "w": 204.0,
+   "h": 176.0
+  },
+  "fish-table": {
+   "url": "assets/chapter-1/kit/fish-table.webp",
+   "texW": 275,
+   "texH": 102,
+   "scale": 0.80029,
+   "w": 220.1,
+   "h": 81.5
+  },
+  "fish-basket-blue": {
+   "url": "assets/chapter-1/kit/fish-basket-blue.webp",
+   "texW": 113,
+   "texH": 64,
+   "scale": 0.79841,
+   "w": 90.2,
+   "h": 51.2
+  },
+  "fish-basket-red": {
+   "url": "assets/chapter-1/kit/fish-basket-red.webp",
+   "texW": 111,
+   "texH": 60,
+   "scale": 0.79874,
+   "w": 88.7,
+   "h": 47.8
+  },
+  "crate-stack": {
+   "url": "assets/chapter-1/kit/crate-stack.webp",
+   "texW": 134,
+   "texH": 88,
+   "scale": 0.80239,
+   "w": 107.5,
+   "h": 70.7
+  },
+  "net-hammock": {
+   "url": "assets/chapter-1/kit/net-hammock.webp",
+   "texW": 246,
+   "texH": 122,
+   "scale": 0.8,
+   "w": 196.8,
+   "h": 98.0
+  },
+  "stall-red": {
+   "url": "assets/chapter-1/kit/stall-red.webp",
+   "texW": 362,
+   "texH": 277,
+   "scale": 0.79983,
+   "w": 289.5,
+   "h": 222.0
+  },
+  "stall-hut": {
+   "url": "assets/chapter-1/kit/stall-hut.webp",
+   "texW": 360,
+   "texH": 276,
+   "scale": 0.79911,
+   "w": 287.7,
+   "h": 220.7
+  },
+  "table-baskets": {
+   "url": "assets/chapter-1/kit/table-baskets.webp",
+   "texW": 193,
+   "texH": 140,
+   "scale": 0.79865,
+   "w": 154.1,
+   "h": 112.1
+  },
+  "stall-large": {
+   "url": "assets/chapter-1/kit/stall-large.webp",
+   "texW": 555,
+   "texH": 370,
+   "scale": 0.8,
+   "w": 444.0,
+   "h": 296.4
+  },
+  "tree-coconut-a": {
+   "url": "assets/chapter-1/kit/tree-coconut-a.webp",
+   "texW": 264,
+   "texH": 391,
+   "scale": 1.25,
+   "w": 330.0,
+   "h": 488.8
+  },
+  "tree-coconut-b": {
+   "url": "assets/chapter-1/kit/tree-coconut-b.webp",
+   "texW": 258,
+   "texH": 365,
+   "scale": 1.25,
+   "w": 322.5,
+   "h": 456.2
+  },
+  "tree-coconut-small": {
+   "url": "assets/chapter-1/kit/tree-coconut-small.webp",
+   "texW": 185,
+   "texH": 251,
+   "scale": 1.2,
+   "w": 222.0,
+   "h": 301.2
+  },
+  "tree-shade-a": {
+   "url": "assets/chapter-1/kit/tree-shade-a.webp",
+   "texW": 460,
+   "texH": 404,
+   "scale": 0.95,
+   "w": 437.0,
+   "h": 383.8
+  },
+  "tree-shade-b": {
+   "url": "assets/chapter-1/kit/tree-shade-b.webp",
+   "texW": 349,
+   "texH": 314,
+   "scale": 0.95,
+   "w": 331.6,
+   "h": 298.3
+  },
+  "bush-a": {
+   "url": "assets/chapter-1/kit/bush-a.webp",
+   "texW": 228,
+   "texH": 116,
+   "scale": 0.80175,
+   "w": 182.8,
+   "h": 92.4
+  },
+  "bush-b": {
+   "url": "assets/chapter-1/kit/bush-b.webp",
+   "texW": 181,
+   "texH": 97,
+   "scale": 0.79807,
+   "w": 144.5,
+   "h": 77.9
+  },
+  "plant-hibiscus": {
+   "url": "assets/chapter-1/kit/plant-hibiscus.webp",
+   "texW": 233,
+   "texH": 124,
+   "scale": 0.8015,
+   "w": 186.8,
+   "h": 99.0
+  },
+  "plant-pandan": {
+   "url": "assets/chapter-1/kit/plant-pandan.webp",
+   "texW": 252,
+   "texH": 191,
+   "scale": 0.7996,
+   "w": 201.5,
+   "h": 152.5
+  },
+  "plant-potted": {
+   "url": "assets/chapter-1/kit/plant-potted.webp",
+   "texW": 107,
+   "texH": 142,
+   "scale": 0.79907,
+   "w": 85.5,
+   "h": 113.8
+  },
+  "plant-flower-yellow": {
+   "url": "assets/chapter-1/kit/plant-flower-yellow.webp",
+   "texW": 215,
+   "texH": 152,
+   "scale": 0.80116,
+   "w": 172.2,
+   "h": 121.8
+  },
+  "obstacle-crate": {
+   "url": "assets/chapter-1/kit/obstacle-crate.webp",
+   "texW": 94,
+   "texH": 83,
+   "scale": 0.80426,
+   "w": 75.6,
+   "h": 66.4,
+   "surface": 5.4
+  },
+  "obstacle-crate-tall": {
+   "url": "assets/chapter-1/kit/obstacle-crate-tall.webp",
+   "texW": 86,
+   "texH": 111,
+   "scale": 0.80372,
+   "w": 69.1,
+   "h": 89.1,
+   "surface": 4.9
+  },
+  "obstacle-barrel": {
+   "url": "assets/chapter-1/kit/obstacle-barrel.webp",
+   "texW": 84,
+   "texH": 104,
+   "scale": 0.79762,
+   "w": 67.0,
+   "h": 83.0
+  },
+  "obstacle-barrel-side": {
+   "url": "assets/chapter-1/kit/obstacle-barrel-side.webp",
+   "texW": 114,
+   "texH": 86,
+   "scale": 0.79825,
+   "w": 91.0,
+   "h": 68.5
+  },
+  "obstacle-basket-stack": {
+   "url": "assets/chapter-1/kit/obstacle-basket-stack.webp",
+   "texW": 107,
+   "texH": 110,
+   "scale": 0.80243,
+   "w": 85.9,
+   "h": 88.0
+  },
+  "obstacle-broken-plank": {
+   "url": "assets/chapter-1/kit/obstacle-broken-plank.webp",
+   "texW": 193,
+   "texH": 141,
+   "scale": 0.8,
+   "w": 154.4,
+   "h": 112.8
+  },
+  "obstacle-cargo-stack": {
+   "url": "assets/chapter-1/kit/obstacle-cargo-stack.webp",
+   "texW": 179,
+   "texH": 139,
+   "scale": 0.80089,
+   "w": 143.4,
+   "h": 111.4
+  },
+  "obstacle-log": {
+   "url": "assets/chapter-1/kit/obstacle-log.webp",
+   "texW": 259,
+   "texH": 60,
+   "scale": 0.80135,
+   "w": 207.5,
+   "h": 47.6
+  },
+  "obstacle-log-pile": {
+   "url": "assets/chapter-1/kit/obstacle-log-pile.webp",
+   "texW": 139,
+   "texH": 114,
+   "scale": 0.80115,
+   "w": 111.4,
+   "h": 90.9
+  },
+  "obstacle-net-pile": {
+   "url": "assets/chapter-1/kit/obstacle-net-pile.webp",
+   "texW": 154,
+   "texH": 100,
+   "scale": 0.7987,
+   "w": 123.0,
+   "h": 80.4
+  },
+  "obstacle-rocks": {
+   "url": "assets/chapter-1/kit/obstacle-rocks.webp",
+   "texW": 236,
+   "texH": 125,
+   "scale": 0.80085,
+   "w": 189.0,
+   "h": 100.1
+  },
+  "obstacle-rocks-small": {
+   "url": "assets/chapter-1/kit/obstacle-rocks-small.webp",
+   "texW": 166,
+   "texH": 84,
+   "scale": 0.79807,
+   "w": 132.5,
+   "h": 67.2
+  },
+  "obstacle-barrier-small": {
+   "url": "assets/chapter-1/kit/obstacle-barrier-small.webp",
+   "texW": 141,
+   "texH": 94,
+   "scale": 0.8,
+   "w": 112.8,
+   "h": 75.0
+  },
+  "obstacle-pier-hole": {
+   "url": "assets/chapter-1/kit/obstacle-pier-hole.webp",
+   "texW": 302,
+   "texH": 177,
+   "scale": 0.79868,
+   "w": 241.2,
+   "h": 141.3
+  },
+  "fg-bush-01": {
+   "url": "assets/chapter-1/kit/fg-bush-01.webp",
+   "texW": 439,
+   "texH": 287,
+   "scale": 0.80046,
+   "w": 351.4,
+   "h": 229.6
+  },
+  "fg-bush-02": {
+   "url": "assets/chapter-1/kit/fg-bush-02.webp",
+   "texW": 402,
+   "texH": 287,
+   "scale": 0.801,
+   "w": 322.0,
+   "h": 229.6
+  },
+  "fg-grass-01": {
+   "url": "assets/chapter-1/kit/fg-grass-01.webp",
+   "texW": 276,
+   "texH": 244,
+   "scale": 0.8,
+   "w": 220.8,
+   "h": 195.6
+  },
+  "fg-leaves-corner-left": {
+   "url": "assets/chapter-1/kit/fg-leaves-corner-left.webp",
+   "texW": 504,
+   "texH": 320,
+   "scale": 0.9,
+   "w": 453.6,
+   "h": 288.0
+  },
+  "fg-leaves-corner-right": {
+   "url": "assets/chapter-1/kit/fg-leaves-corner-right.webp",
+   "texW": 470,
+   "texH": 320,
+   "scale": 0.9,
+   "w": 423.0,
+   "h": 288.0
+  },
+  "fg-leaves-large": {
+   "url": "assets/chapter-1/kit/fg-leaves-large.webp",
+   "texW": 496,
+   "texH": 358,
+   "scale": 0.8,
+   "w": 396.8,
+   "h": 286.4
+  },
+  "fg-pier-post-near": {
+   "url": "assets/chapter-1/kit/fg-pier-post-near.webp",
+   "texW": 140,
+   "texH": 390,
+   "scale": 0.9,
+   "w": 126.0,
+   "h": 351.0
+  },
+  "fg-plant-coastal-01": {
+   "url": "assets/chapter-1/kit/fg-plant-coastal-01.webp",
+   "texW": 388,
+   "texH": 304,
+   "scale": 0.80103,
+   "w": 310.8,
+   "h": 243.6
+  },
+  "fg-plant-coastal-02": {
+   "url": "assets/chapter-1/kit/fg-plant-coastal-02.webp",
+   "texW": 368,
+   "texH": 278,
+   "scale": 0.79891,
+   "w": 294.0,
+   "h": 222.6
+  },
+  "fg-rocks-01": {
+   "url": "assets/chapter-1/kit/fg-rocks-01.webp",
+   "texW": 405,
+   "texH": 189,
+   "scale": 0.8,
+   "w": 324.0,
+   "h": 151.2
+  },
+  "fg-rocks-02": {
+   "url": "assets/chapter-1/kit/fg-rocks-02.webp",
+   "texW": 292,
+   "texH": 160,
+   "scale": 0.80137,
+   "w": 234.0,
+   "h": 128.4
+  },
+  "cloud-large-01": {
+   "url": "assets/chapter-1/kit/cloud-large-01.webp",
+   "texW": 576,
+   "texH": 230,
+   "scale": 0.80042,
+   "w": 461.0,
+   "h": 183.9
+  },
+  "cloud-large-02": {
+   "url": "assets/chapter-1/kit/cloud-large-02.webp",
+   "texW": 507,
+   "texH": 231,
+   "scale": 0.79937,
+   "w": 405.3,
+   "h": 185.0
+  },
+  "cloud-medium-01": {
+   "url": "assets/chapter-1/kit/cloud-medium-01.webp",
+   "texW": 337,
+   "texH": 159,
+   "scale": 0.79905,
+   "w": 269.3,
+   "h": 127.2
+  },
+  "cloud-medium-02": {
+   "url": "assets/chapter-1/kit/cloud-medium-02.webp",
+   "texW": 339,
+   "texH": 139,
+   "scale": 0.80035,
+   "w": 271.3,
+   "h": 110.8
+  },
+  "cloud-small-01": {
+   "url": "assets/chapter-1/kit/cloud-small-01.webp",
+   "texW": 179,
+   "texH": 71,
+   "scale": 0.79777,
+   "w": 142.8,
+   "h": 56.4
+  },
+  "cloud-small-02": {
+   "url": "assets/chapter-1/kit/cloud-small-02.webp",
+   "texW": 177,
+   "texH": 69,
+   "scale": 0.7991,
+   "w": 141.4,
+   "h": 55.1
+  },
+  "cloud-wisp-01": {
+   "url": "assets/chapter-1/kit/cloud-wisp-01.webp",
+   "texW": 415,
+   "texH": 62,
+   "scale": 0.8,
+   "w": 332.0,
+   "h": 50.0
+  },
+  "cloud-wisp-02": {
+   "url": "assets/chapter-1/kit/cloud-wisp-02.webp",
+   "texW": 294,
+   "texH": 38,
+   "scale": 0.8,
+   "w": 235.2,
+   "h": 30.4
+  },
+  "island-rock": {
+   "url": "assets/chapter-1/kit/island-rock.webp",
+   "texW": 235,
+   "texH": 93,
+   "scale": 0.80068,
+   "w": 188.2,
+   "h": 74.6
+  }
+ },
+ "strips": {
+  "mountain-far": {
+   "url": "assets/chapter-1/kit/mountain-far.webp",
+   "w": 3287,
+   "h": 99,
+   "padBottom": 4
+  },
+  "mountain-mid": {
+   "url": "assets/chapter-1/kit/mountain-mid.webp",
+   "w": 3527,
+   "h": 133,
+   "padBottom": 4
+  },
+  "mountain-near": {
+   "url": "assets/chapter-1/kit/mountain-near.webp",
+   "w": 3278,
+   "h": 202,
+   "padBottom": 4
+  },
+  "ocean": {
+   "url": "assets/chapter-1/kit/ocean.webp",
+   "w": 3042,
+   "h": 445
+  },
+  "forest-back": {
+   "url": "assets/chapter-1/kit/forest-back.webp",
+   "w": 3259,
+   "h": 155,
+   "padBottom": 4
+  },
+  "forest-front": {
+   "url": "assets/chapter-1/kit/forest-front.webp",
+   "w": 3728,
+   "h": 207,
+   "padBottom": 4
+  },
+  "grass-strip": {
+   "url": "assets/chapter-1/kit/grass-strip.webp",
+   "w": 799,
+   "h": 93,
+   "padBottom": 4
+  },
+  "ground-fill": {
+   "url": "assets/chapter-1/kit/ground-fill.webp",
+   "w": 600,
+   "h": 116
+  }
+ },
+ "grounds": {
+  "ground-grass": {
+   "h": 118,
+   "surface": 52,
+   "fade": 32,
+   "cap-l": {
+    "url": "assets/chapter-1/kit/ground-grass-cap-l.webp",
+    "w": 182
+   },
+   "mid": {
+    "url": "assets/chapter-1/kit/ground-grass-mid.webp",
+    "w": 854,
+    "h": 122
+   },
+   "cap-r": {
+    "url": "assets/chapter-1/kit/ground-grass-cap-r.webp",
+    "w": 192
+   }
+  },
+  "ground-grass-flower": {
+   "h": 117,
+   "surface": 52,
+   "fade": 32,
+   "cap-l": {
+    "url": "assets/chapter-1/kit/ground-grass-flower-cap-l.webp",
+    "w": 182
+   },
+   "mid": {
+    "url": "assets/chapter-1/kit/ground-grass-flower-mid.webp",
+    "w": 852,
+    "h": 121
+   },
+   "cap-r": {
+    "url": "assets/chapter-1/kit/ground-grass-flower-cap-r.webp",
+    "w": 192
+   }
+  },
+  "ground-sand": {
+   "h": 119,
+   "surface": 55,
+   "fade": 32,
+   "cap-l": {
+    "url": "assets/chapter-1/kit/ground-sand-cap-l.webp",
+    "w": 202
+   },
+   "mid": {
+    "url": "assets/chapter-1/kit/ground-sand-mid.webp",
+    "w": 798,
+    "h": 123
+   },
+   "cap-r": {
+    "url": "assets/chapter-1/kit/ground-sand-cap-r.webp",
+    "w": 202
+   }
+  },
+  "ground-rocky": {
+   "h": 119,
+   "surface": 60,
+   "fade": 32,
+   "cap-l": {
+    "url": "assets/chapter-1/kit/ground-rocky-cap-l.webp",
+    "w": 212
+   },
+   "mid": {
+    "url": "assets/chapter-1/kit/ground-rocky-mid.webp",
+    "w": 754,
+    "h": 123
+   },
+   "cap-r": {
+    "url": "assets/chapter-1/kit/ground-rocky-cap-r.webp",
+    "w": 212
+   }
+  },
+  "ground-dirt": {
+   "h": 129,
+   "surface": 55,
+   "fade": 32,
+   "cap-l": {
+    "url": "assets/chapter-1/kit/ground-dirt-cap-l.webp",
+    "w": 182
+   },
+   "mid": {
+    "url": "assets/chapter-1/kit/ground-dirt-mid.webp",
+    "w": 898,
+    "h": 133
+   },
+   "cap-r": {
+    "url": "assets/chapter-1/kit/ground-dirt-cap-r.webp",
+    "w": 182
+   }
+  }
+ }
+}

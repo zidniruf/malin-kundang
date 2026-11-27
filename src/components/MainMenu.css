@@ -1,0 +1,838 @@
+/* Opening & main menu — Malin Kundang: The Moral Adventure
+   Fase dikendalikan oleh atribut data-phase pada .mm:
+   loading → sky (Scene 1) → reveal (Scene 2) → menu (Scene 3) */
+
+.mm {
+  --mm-font: 'Fredoka', 'Baloo 2', 'Nunito', 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif;
+  --mm-ease-camera: cubic-bezier(0.65, 0, 0.2, 1);
+  --mm-ease-pop: cubic-bezier(0.2, 1.4, 0.4, 1);
+  --mm-cream: #fff6e2;
+  --mm-wood: #5b3516;
+  --mm-deep: #0b3a52;
+  --mm-orange: #ff8c2e;
+  --mm-orange-dark: #c4561a;
+  --mm-stage-x: 50%;
+  --mm-stage-y: 58%;
+
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: #5cc4f0;
+  color: var(--mm-cream);
+  font-family: var(--mm-font);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Stage: dunia 16:9 yang menutupi viewport (seperti object-fit: cover) ---------- */
+
+.mm-stage {
+  position: absolute;
+  left: var(--mm-stage-x);
+  top: var(--mm-stage-y);
+  width: max(100vw, 100vh * 1672 / 941);
+  width: max(100vw, 100dvh * 1672 / 941);
+  aspect-ratio: 1672 / 941;
+  transform: translate(calc(var(--mm-stage-x) * -1), calc(var(--mm-stage-y) * -1));
+  pointer-events: none;
+}
+
+.mm-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform var(--reveal-ms) var(--mm-ease-camera);
+}
+
+.mm-layer > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+/* Scene 1: kamera berada di langit. Layer dekat disembunyikan di bawah layar dengan
+   jarak berbeda; saat reveal semuanya kembali ke 0 sehingga terjadi parallax. */
+.mm-sky { transform-origin: 50% 0%; }
+.mm-sky > img { object-position: center top; }
+
+.mm[data-phase='loading'] .mm-sky,
+.mm[data-phase='sky'] .mm-sky { transform: scale(1.32); }
+
+.mm[data-phase='loading'] .mm-clouds,
+.mm[data-phase='sky'] .mm-clouds { transform: translateY(14%) scale(1.08); }
+
+.mm[data-phase='loading'] .mm-beach,
+.mm[data-phase='sky'] .mm-beach { transform: translateY(80%); }
+
+.mm[data-phase='loading'] .mm-underwater,
+.mm[data-phase='sky'] .mm-underwater { transform: translateY(110%); }
+
+.mm-beach { transition-delay: 80ms; }
+.mm-underwater { transition-delay: 220ms; }
+
+/* Lewati intro: layer tiba lebih cepat. */
+.mm[data-phase='menu'] .mm-layer { transition-duration: 1.1s; transition-delay: 0ms; }
+
+/* Awan bergerak perlahan (loop bolak-balik agar tepi gambar tidak terpotong). */
+.mm-clouds > img {
+  scale: 1.08;
+  animation: mm-cloud-drift 46s ease-in-out infinite alternate;
+}
+
+@keyframes mm-cloud-drift {
+  from { translate: -3% 0; }
+  to { translate: 3% -1%; }
+}
+
+/* Laut: kilau ombak bergerak di atas area air pada beach layer. */
+.mm-sea-shimmer {
+  position: absolute;
+  left: 0;
+  top: 67%;
+  width: 80%;
+  height: 25%;
+  background-image:
+    repeating-linear-gradient(176deg, transparent 0 18px, rgb(255 255 255 / 0.22) 18px 20px, transparent 20px 41px),
+    repeating-linear-gradient(-4deg, transparent 0 26px, rgb(255 255 255 / 0.14) 26px 27px, transparent 27px 55px);
+  background-size: 240px 100%, 320px 100%;
+  mix-blend-mode: soft-light;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 45% 45%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 45% 45%, #000 30%, transparent 75%);
+  animation: mm-shimmer 9s linear infinite, mm-shimmer-pulse 4.5s ease-in-out infinite alternate;
+}
+
+.mm-sea-shimmer--slow {
+  top: 72%;
+  opacity: 0.7;
+  animation-duration: 15s, 6s;
+  animation-direction: reverse, alternate;
+}
+
+@keyframes mm-shimmer {
+  to { background-position: 240px 0, -320px 0; }
+}
+
+@keyframes mm-shimmer-pulse {
+  from { opacity: 0.45; }
+  to { opacity: 1; }
+}
+
+/* Kapal layar berlayar pelan di laut lepas, di depan pegunungan dan sebelum garis pantai. */
+.mm-ship-track {
+  position: absolute;
+  left: 30%;
+  top: 57.5%;
+  width: 32%;
+  height: 15%;
+}
+
+.mm-ship {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34.4%;
+  height: auto;
+  transform-origin: 50% 90%;
+  animation:
+    mm-ship-sail 80s linear infinite,
+    mm-ship-bob 4.8s ease-in-out infinite alternate;
+}
+
+/* Haluan kapal menghadap kiri, jadi kapal bergerak dari kanan ke kiri. */
+@keyframes mm-ship-sail {
+  0% { translate: 191% 0; opacity: 0; }
+  6% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { translate: 0 0; opacity: 0; }
+}
+
+@keyframes mm-ship-bob {
+  from { rotate: -1.4deg; }
+  to { rotate: 1.2deg; }
+}
+
+/* Foreground bawah air bergoyang halus seperti terbawa arus. */
+.mm-underwater > img {
+  transform-origin: 50% 100%;
+  animation: mm-sway 7s ease-in-out infinite alternate;
+}
+
+@keyframes mm-sway {
+  from { translate: 0 0.6%; scale: 1.01; }
+  to { translate: -0.6% 0; scale: 1.02; }
+}
+
+/* ---------- Scrim untuk keterbacaan menu ---------- */
+
+.mm-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(90deg, rgb(6 46 66 / 0.55) 0%, rgb(6 46 66 / 0.28) 30%, transparent 55%),
+    linear-gradient(180deg, rgb(6 46 66 / 0.18) 0%, transparent 22%);
+  transition: opacity 1.6s ease 0.8s;
+}
+
+.mm[data-phase='reveal'] .mm-scrim,
+.mm[data-phase='menu'] .mm-scrim { opacity: 1; }
+
+/* ---------- Malin muda ---------- */
+
+.mm-malin {
+  position: absolute;
+  z-index: 2;
+  right: clamp(0px, 6vw, 160px);
+  bottom: -3vh;
+  height: min(76vh, 56vw);
+  height: min(76dvh, 56vw);
+  width: auto;
+  pointer-events: none;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 18px 18px rgb(0 40 60 / 0.35));
+  animation:
+    mm-malin-in 1.1s var(--mm-ease-pop) both,
+    mm-breathe 4.5s ease-in-out 1.1s infinite alternate;
+}
+
+@keyframes mm-malin-in {
+  from { opacity: 0; transform: translateX(14%) translateY(6%); }
+}
+
+@keyframes mm-breathe {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(1.012) translateY(-0.4%); }
+}
+
+/* ---------- UI ---------- */
+
+.mm-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  padding:
+    max(clamp(16px, 4vh, 56px), env(safe-area-inset-top))
+    max(clamp(20px, 5vw, 88px), env(safe-area-inset-right))
+    max(clamp(16px, 4vh, 56px), env(safe-area-inset-bottom))
+    max(clamp(20px, 5vw, 88px), env(safe-area-inset-left));
+  pointer-events: none;
+}
+
+.mm-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(10px, 2.6vh, 28px);
+  width: min(460px, 38vw);
+  min-width: 260px;
+}
+
+.mm-title-slot {
+  /* Title art berasio 4:3; batasi lebar dengan tinggi viewport agar menu selalu muat. */
+  width: min(100%, 48vh);
+  width: min(100%, 48dvh);
+}
+
+.mm-title {
+  margin: 0;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.mm[data-phase='loading'] .mm-title,
+.mm[data-phase='sky'] .mm-title {
+  transform: translate(var(--title-dx, 0px), var(--title-dy, 0px)) scale(var(--title-scale, 1));
+}
+
+.mm[data-phase='loading'] .mm-title { opacity: 0; }
+
+.mm[data-phase='reveal'] .mm-title {
+  transition: transform calc(var(--reveal-ms) * 0.85) var(--mm-ease-camera) 0.35s;
+}
+
+.mm[data-phase='menu'] .mm-title { transition: transform 0.9s var(--mm-ease-camera); }
+
+.mm-title-inner { display: block; }
+
+.mm-title-inner > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 0 rgb(11 58 82 / 0.35)) drop-shadow(0 14px 24px rgb(0 40 60 / 0.35));
+}
+
+/* Scene 1: judul muncul halus. */
+.mm[data-phase='sky'] .mm-title-inner {
+  animation: mm-title-in 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+
+.mm[data-phase='menu'] .mm-title-inner,
+.mm[data-phase='story'] .mm-title-inner {
+  animation: mm-float 6s ease-in-out infinite alternate;
+}
+
+@keyframes mm-title-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.92); filter: blur(8px); }
+}
+
+@keyframes mm-float {
+  from { transform: translateY(0) rotate(-0.6deg); }
+  to { transform: translateY(-6px) rotate(0.6deg); }
+}
+
+/* Judul teks (dipakai bila title art tidak tersedia). */
+.mm-title-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--mm-font);
+  line-height: 0.95;
+  text-align: center;
+  color: #fffdf6;
+  text-shadow:
+    0 3px 0 #1b6c8c,
+    0 6px 0 rgb(11 58 82 / 0.55),
+    0 12px 24px rgb(0 40 60 / 0.4);
+}
+
+.mm-title-main {
+  font-size: clamp(2.4rem, 1.4rem + 4.6vw, 5.4rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.mm-title-sub {
+  margin-top: 0.5em;
+  font-size: clamp(0.8rem, 0.6rem + 0.8vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #fff1d0;
+}
+
+/* Menu: tersembunyi selama intro tetapi tetap memakan ruang agar posisi judul stabil. */
+.mm-menu {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2.4vh, 24px);
+  pointer-events: auto;
+}
+
+.mm[data-phase='loading'] .mm-menu,
+.mm[data-phase='sky'] .mm-menu,
+.mm[data-phase='reveal'] .mm-menu { visibility: hidden; }
+
+.mm-tagline {
+  margin: 0;
+  max-width: 34ch;
+  font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: #fff8ea;
+  text-shadow: 0 2px 6px rgb(0 40 60 / 0.6);
+}
+
+.mm[data-phase='menu'] .mm-tagline { animation: mm-fade-up 0.8s ease both; }
+
+.mm-nav {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.6vh, 14px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 360px;
+}
+
+.mm[data-phase='menu'] .mm-nav-item {
+  animation: mm-btn-in 0.7s var(--mm-ease-pop) both;
+  animation-delay: calc(var(--i) * 90ms + 150ms);
+}
+
+@keyframes mm-btn-in {
+  from { opacity: 0; transform: translateX(-36px) scale(0.9); }
+}
+
+@keyframes mm-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
+/* ---------- Tombol ---------- */
+
+.mm-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  width: 100%;
+  padding: 0.55em 1.3em 0.55em 0.55em;
+  overflow: hidden;
+  border: 3px solid #fffdf4;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fffaf0 0%, #ffe8bd 100%);
+  color: var(--mm-wood);
+  font-family: var(--mm-font);
+  font-size: clamp(1rem, 0.85rem + 0.55vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #c98d4c, 0 12px 22px rgb(6 46 66 / 0.32);
+  transition: transform 0.2s var(--mm-ease-pop), box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.mm-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.55) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.mm-btn--primary {
+  border-color: #ffe3b8;
+  background: linear-gradient(180deg, #ffb24a 0%, var(--mm-orange) 100%);
+  color: #fff;
+  font-size: clamp(1.1rem, 0.9rem + 0.75vw, 1.55rem);
+  text-shadow: 0 2px 0 rgb(150 60 0 / 0.45);
+  box-shadow: 0 6px 0 var(--mm-orange-dark), 0 14px 26px rgb(6 46 66 / 0.38);
+}
+
+.mm-btn-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background: #f6d49c;
+  color: var(--mm-wood);
+  transition: transform 0.3s var(--mm-ease-pop);
+}
+
+.mm-btn--primary .mm-btn-icon {
+  background: #fff4dc;
+  color: var(--mm-orange-dark);
+}
+
+.mm-btn-icon svg { width: 60%; height: 60%; }
+
+@media (hover: hover) {
+  .mm-btn:hover {
+    transform: translateY(-3px) rotate(-1deg);
+    box-shadow: 0 8px 0 #c98d4c, 0 18px 28px rgb(6 46 66 / 0.36);
+    filter: brightness(1.04);
+  }
+
+  .mm-btn--primary:hover {
+    box-shadow: 0 9px 0 var(--mm-orange-dark), 0 20px 30px rgb(6 46 66 / 0.42);
+  }
+
+  .mm-btn:hover::after { animation: mm-shine 0.9s ease; }
+  .mm-btn:hover .mm-btn-icon { transform: rotate(-12deg) scale(1.12); }
+}
+
+.mm-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #c98d4c, 0 6px 12px rgb(6 46 66 / 0.3);
+}
+
+.mm-btn--primary:active { box-shadow: 0 1px 0 var(--mm-orange-dark), 0 6px 12px rgb(6 46 66 / 0.3); }
+
+.mm-btn:focus-visible {
+  outline: 4px solid #fff;
+  outline-offset: 4px;
+}
+
+@keyframes mm-shine {
+  to { transform: translateX(120%); }
+}
+
+.mm-btn--small {
+  width: auto;
+  padding: 0.5em 1.4em;
+  font-size: 1.05rem;
+}
+
+/* ---------- Status & lewati ---------- */
+
+.mm-loading,
+.mm-skip,
+.mm-error {
+  position: absolute;
+  z-index: 4;
+  margin: 0;
+  font-family: var(--mm-font);
+}
+
+.mm-loading {
+  left: 50%;
+  bottom: 12vh;
+  transform: translateX(-50%);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 2px 8px rgb(0 40 60 / 0.5);
+  animation: mm-shimmer-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.mm-skip {
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  padding: 0.45em 1.1em;
+  border: 2px solid rgb(255 255 255 / 0.7);
+  border-radius: 999px;
+  background: rgb(11 58 82 / 0.35);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease;
+}
+
+.mm-skip:hover { background: rgb(11 58 82 / 0.6); }
+.mm-skip:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.mm-error {
+  left: 50%;
+  top: max(12px, env(safe-area-inset-top));
+  transform: translateX(-50%);
+  max-width: min(92vw, 520px);
+  padding: 0.6em 1.1em;
+  border-radius: 16px;
+  background: #fff1e0;
+  color: #7a2d00;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.25);
+}
+
+/* ---------- Panel dialog ---------- */
+
+.mm-dialog {
+  width: min(520px, 92vw);
+  max-height: 88vh;
+  max-height: 88dvh;
+  margin: auto; /* preflight Tailwind mereset margin; dialog modal perlu margin auto agar di tengah */
+  padding: 0;
+  border: 4px solid #fffdf4;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #fffaf0 0%, #ffefcf 100%);
+  color: var(--mm-wood);
+  font-family: var(--mm-font);
+  box-shadow: 0 8px 0 #c98d4c, 0 30px 60px rgb(0 30 45 / 0.45);
+  overflow: auto;
+}
+
+.mm-dialog[open] { animation: mm-dialog-in 0.4s var(--mm-ease-pop); }
+
+.mm-dialog::backdrop {
+  background: rgb(4 34 50 / 0.5);
+  backdrop-filter: blur(3px);
+}
+
+@keyframes mm-dialog-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+}
+
+.mm-dialog-body {
+  padding: clamp(20px, 4vw, 32px);
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.mm-dialog-body h2 {
+  margin: 0 0 0.6em;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #d0601b;
+}
+
+.mm-dialog-body h3 {
+  margin: 1.1em 0 0.3em;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.mm-dialog-body p { margin: 0 0 0.6em; }
+
+.mm-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 1.4em;
+}
+
+.mm-controls {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.mm-controls li { margin: 0.2em 0; }
+
+.mm-controls kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0 0.35em;
+  border: 2px solid #d9b98a;
+  border-bottom-width: 4px;
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--mm-font);
+  font-size: 0.9em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mm-fineprint {
+  margin-top: 1.2em !important;
+  font-size: 0.85rem;
+  color: #8a6440;
+}
+
+.mm-notice {
+  padding: 0.6em 0.9em;
+  border-radius: 14px;
+  background: #ffe1c2;
+  color: #7a2d00;
+}
+
+.mm-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0.8em 0;
+  border-bottom: 2px dashed #efd3a6;
+}
+
+.mm-setting--column {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  border-bottom: 0;
+}
+
+.mm-setting-label {
+  margin: 0 !important;
+  font-weight: 600;
+}
+
+.mm-setting-hint {
+  margin: 0.15em 0 0 !important;
+  font-size: 0.9rem;
+  color: #8a6440;
+}
+
+.mm-switch {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  width: 92px;
+  height: 40px;
+  padding: 0 12px 0 46px;
+  border: 3px solid #fffdf4;
+  border-radius: 999px;
+  background: #d8c3a3;
+  color: #fff;
+  font-family: var(--mm-font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.15);
+  transition: background 0.2s ease;
+}
+
+.mm-switch-thumb {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.25);
+  transform: translateY(-50%);
+  transition: left 0.25s var(--mm-ease-pop);
+}
+
+.mm-switch[aria-checked='true'] {
+  padding: 0 46px 0 14px;
+  background: #36b37e;
+}
+
+.mm-switch[aria-checked='true'] .mm-switch-thumb { left: 54px; }
+.mm-switch:disabled { cursor: not-allowed; opacity: 0.55; }
+.mm-switch:focus-visible { outline: 3px solid #d0601b; outline-offset: 3px; }
+
+.mm-range {
+  width: 100%;
+  accent-color: var(--mm-orange);
+}
+
+.mm-range:disabled { opacity: 0.5; }
+
+/* ---------- Cinematic: berlanjut dari menu (data-phase="story") ----------
+   Kamera ditulis oleh OpeningCinematic sebagai --cam-x/--cam-y (px) dan --cam-z.
+   Setiap layer bergeser sebesar kamera × --d (parallax). Saat menu, semua nilai netral. */
+
+.mm-camera,
+.mm-malin-rig,
+.mm-malin-walk {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mm-sky { --d: 0.1; }
+.mm-clouds { --d: 0.3; }
+.mm-beach { --d: 1; }
+.mm-underwater { --d: 1.12; }
+
+.mm[data-phase='story'] .mm-camera {
+  transform: scale(var(--cam-z, 1));
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.mm[data-phase='story'] .mm-layer {
+  translate: calc(var(--cam-x, 0px) * var(--d) * -1) calc(var(--cam-y, 0px) * var(--d) * -1);
+}
+
+.mm[data-phase='story'] .mm-malin-rig {
+  translate: calc(var(--cam-x, 0px) * -1.04) calc(var(--cam-y, 0px) * -1.04);
+}
+
+/* Malin di scene menu tetap berdiri (animasi napas); berjalan hanya dilakukan sprite
+   Malin opening di babak kampung (Phaser), bukan dengan menggeser gambar statis. */
+
+/* Kapal: melanjutkan posisi dari animasi menu, lalu dikendalikan cinematic. */
+.mm[data-phase='story'] .mm-ship {
+  animation: mm-ship-bob 4.8s ease-in-out infinite alternate;
+  translate: var(--ship-tx, 95%) var(--ship-ty, 0%);
+  scale: var(--ship-s, 1);
+  opacity: var(--ship-o, 1);
+}
+
+/* UI menu memudar; logo naik perlahan lalu hilang. Background & Malin tetap. */
+.mm[data-phase='story'] .mm-scrim {
+  opacity: 0;
+  transition: opacity 1.8s ease 0.3s;
+}
+
+.mm[data-phase='story'] .mm-menu {
+  visibility: hidden;
+  transition: visibility 0s linear 1.1s;
+}
+
+.mm[data-phase='story'] .mm-nav-item {
+  animation: mm-btn-out 0.55s cubic-bezier(0.4, 0, 1, 1) both;
+  animation-delay: calc((3 - var(--i)) * 70ms);
+}
+
+.mm[data-phase='story'] .mm-tagline {
+  animation: mm-fade-out 0.6s ease-in both;
+}
+
+.mm[data-phase='story'] .mm-title {
+  transform: translateY(-48vh);
+  opacity: 0;
+  transition:
+    transform 2.4s cubic-bezier(0.45, 0, 0.2, 1) 0.25s,
+    opacity 1.3s ease 1.1s;
+}
+
+/* Setelah kampung dermaga menutupi layar, scene menu tidak perlu dilukis lagi. */
+.mm[data-cine-covered='true'] .mm-camera,
+.mm[data-cine-covered='true'] .mm-ui {
+  visibility: hidden;
+}
+
+@keyframes mm-btn-out {
+  to { opacity: 0; transform: translateX(-28px) scale(0.94); }
+}
+
+@keyframes mm-fade-out {
+  to { opacity: 0; transform: translateY(6px); }
+}
+
+/* ---------- Responsif ---------- */
+
+/* Layar sempit (tablet kecil): kolom menu sedikit lebih lebar. */
+@media (max-width: 900px) and (orientation: landscape) {
+  .mm-column { width: min(400px, 44vw); }
+  .mm-malin { right: 0; }
+}
+
+/* Potret (smartphone/tablet tegak): judul di atas, menu di bawah, Malin di kanan. */
+@media (orientation: portrait) {
+  .mm { --mm-stage-x: 74%; --mm-stage-y: 50%; }
+
+  .mm-column {
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .mm-title-slot { width: min(82vw, 440px, 48dvh); }
+  .mm-menu { align-items: center; width: min(86vw, 380px); }
+  .mm-tagline { display: none; }
+  .mm-nav { width: 100%; }
+
+  .mm-scrim {
+    background:
+      linear-gradient(0deg, rgb(6 46 66 / 0.6) 0%, rgb(6 46 66 / 0.2) 35%, transparent 55%),
+      linear-gradient(180deg, rgb(6 46 66 / 0.25) 0%, transparent 25%);
+  }
+
+  .mm-malin {
+    right: -10vw;
+    bottom: 24vh;
+    bottom: 24dvh;
+    height: min(46vh, 120vw);
+    height: min(46dvh, 120vw);
+  }
+
+  @keyframes mm-btn-in {
+    from { opacity: 0; transform: translateY(24px) scale(0.92); }
+  }
+}
+
+/* Landscape pendek (smartphone miring). */
+@media (orientation: landscape) and (max-height: 520px) {
+  .mm-column { width: min(340px, 40vw); gap: 8px; }
+  .mm-title-slot { width: min(100%, 42dvh); }
+  .mm-tagline { display: none; }
+  .mm-nav { gap: 7px; }
+  .mm-btn { font-size: 0.95rem; padding-block: 0.35em; border-width: 2px; }
+  .mm-btn--primary { font-size: 1.05rem; }
+  .mm-btn-icon { width: 1.8em; height: 1.8em; }
+  .mm-malin { height: 92vh; height: 92dvh; bottom: -4vh; }
+}
+
+/* Pengguna yang mengurangi animasi: tanpa intro, loop, atau gerakan dekoratif. */
+@media (prefers-reduced-motion: reduce) {
+  .mm *,
+  .mm *::before,
+  .mm *::after,
+  .mm-dialog[open] {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .mm-btn:hover { transform: none; }
+}

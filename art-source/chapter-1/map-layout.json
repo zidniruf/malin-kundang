@@ -1,0 +1,78 @@
+{
+  "title": "Malin Kundang - Chapter 1: Kampung Nelayan",
+  "camera": "2D / 2.5D side-scrolling",
+  "referenceViewport": {
+    "width": 1280,
+    "height": 720,
+    "orientation": "landscape"
+  },
+  "world": {
+    "width": 8560,
+    "height": 720,
+    "units": "pixels",
+    "scroll": "horizontal"
+  },
+  "segments": [
+    {
+      "id": "area-01-rumah-malin",
+      "name": "Rumah Malin",
+      "file": "backgrounds/area-01-rumah-malin.png",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "area-02-dermaga-nelayan",
+      "name": "Dermaga Nelayan",
+      "file": "backgrounds/area-02-dermaga-nelayan.png",
+      "x": 1280,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "area-03-dermaga-rusak",
+      "name": "Dermaga Rusak",
+      "file": "backgrounds/area-03-dermaga-rusak.png",
+      "x": 2560,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "area-04-jalan-kampung",
+      "name": "Jalan Kampung",
+      "file": "backgrounds/area-04-jalan-kampung.png",
+      "x": 3840,
+      "y": 0,
+      "width": 2160,
+      "height": 720
+    },
+    {
+      "id": "area-05-pasar-ikan",
+      "name": "Pasar Ikan",
+      "file": "backgrounds/area-05-pasar-ikan.png",
+      "x": 6000,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "area-06-pelabuhan",
+      "name": "Pelabuhan",
+      "file": "backgrounds/area-06-pelabuhan.png",
+      "x": 7280,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "implementationNotes": [
+    "Background PNGs are scenic art layers, not collision geometry.",
+    "Build walkable ground and obstacle colliders separately in Phaser.",
+    "Use the transparent village and pier strips as optional foreground or modular overlays; do not stack them over a background if the same buildings are already baked into that background.",
+    "Area 4 is intentionally wider (2160 px) to create a longer route between the damaged pier and fish market.",
+    "NPC spritesheets are optional and should be spawned as Phaser GameObjects, not baked into the background."
+  ]
+}

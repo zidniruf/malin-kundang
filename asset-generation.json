@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-26",
+  "tool": "Built-in image_gen",
+  "type": "AI-generated based on user visual references; not original image crops",
+  "assets": [
+    {
+      "key": "l1-sky",
+      "file": "public/assets/backgrounds/level-1/l1-sky.png",
+      "prompt": "Use case: stylized-concept. Asset type: standalone sky background layer for Level 1 of a 2D side-scrolling Malin Kundang educational game. Input image: the last user-supplied asset board is a style reference only, especially its sky strip. Generate ONLY a clean wide 16:9 blue tropical daytime sky with fluffy hand-painted cumulus clouds, matching the reference's rich stylized painterly game-art look. Clouds concentrated in lower half, lighter cyan near bottom, saturated blue overhead. Full bleed opaque image. No mountains, water, land, trees, buildings, characters, platforms, labels, panels, borders, lettering, UI, logo or watermark. This is one independent production background layer, not an asset sheet or a composite scene."
+    },
+    {
+      "key": "l1-mountains",
+      "file": "public/assets/backgrounds/level-1/l1-mountains.png",
+      "prompt": "Use case: stylized-concept. Create ONE standalone wide 16:9 transparent PNG background layer for a 2D side-scrolling game set in a tropical West Sumatran fishing village, hand-painted stylized rich game art matching the recent sky image. Subject ONLY distant blue teal tropical mountain range with lush slopes and atmospheric haze. Mountain silhouettes occupy bottom 55% of canvas and extend fully across left and right edges, highest summit right of center, opaque land filled to bottom. Everything above mountain skyline is truly transparent alpha. No sky fill, clouds, sea, houses, foreground trees, UI, text, frames, labels or asset sheet. Independent parallax layer."
+    },
+    {
+      "key": "l1-forest",
+      "file": "public/assets/backgrounds/level-1/l1-forest.png",
+      "prompt": "Use case: stylized-concept. ONE independent 16:9 transparent PNG parallax layer for Malin Kundang 2D side-scrolling tropical fishing village game. Hand-painted stylized game art matching the recent mountain layer. Only a continuous band of distant tropical forest canopies in varied teal and emerald green, subtle atmospheric depth, small palms mixed with rounded leafy crowns. Forest occupies bottom 32% of the canvas and fills to bottom edge, extends across width. Entire upper 68% truly transparent alpha. No mountains, sky, ground platforms, houses, text, frames, panels, characters, UI, labels. Rich cohesive illustrated foliage, not realistic photography."
+    },
+    {
+      "key": "l1-village",
+      "file": "public/assets/backgrounds/level-1/l1-village.png",
+      "prompt": "Use case: stylized-concept. ONE standalone 16:9 transparent PNG midground village layer for Malin Kundang side-scrolling 2D game. Hand-painted richly colored stylized game art matching recent forest and mountain layers. A West Sumatran coastal fishing hamlet: one wooden Minangkabau rumah gadang with upward curved pointed gonjong roof on left, two small thatched wooden stilt huts toward middle, coconut palms, short wooden fishing pier toward right. Side view with slight 2.5D depth. Warm wood and terracotta, lush green leaves. Buildings and pier all stand on SAME horizontal baseline at 82% canvas height. Subjects occupy lower half, upper half transparent. Everything outside buildings, palms, pier and small foundation shrubs is true transparent alpha, including below baseline. No sky, mountains, forest backdrop, ocean fill, terrain strip, people, text, panels, labels, border, logo or watermark. Make one coherent village layer, no asset-sheet layout."
+    },
+    {
+      "key": "l1-ground",
+      "file": "public/assets/backgrounds/level-1/l1-ground.png",
+      "prompt": "Use case: stylized-concept. ONE independent wide 16:9 transparent PNG ground layer for 2D side-scrolling tropical Malin Kundang game. Rich hand-painted stylized game art matching the recent village image. A single continuous horizontal grass-topped earth platform across full width of image, with flat level walkable top at exactly 82% canvas height; visible warm ochre dirt and irregular embedded rocks below, grass lip in bright lush green. Earth fills from the walkable top all the way down to bottom edge. Upper 80% completely transparent alpha with just a small grass fringe above the flat top. Straight side-on cross section, no perspective path. NO floating platforms, no buildings, trees, characters, sky, water, scenery, text, panels, labels, borders or UI. No grid or multiple tile variants. One continuous terrain strip suitable as visual ground layer; no claim of seamless tiling."
+    },
+    {
+      "key": "l1-foreground",
+      "file": "public/assets/backgrounds/level-1/l1-foreground.png",
+      "prompt": "Use case: stylized-concept. ONE standalone 16:9 transparent PNG foreground decoration layer for Malin Kundang 2D tropical side-scroller. Hand-painted lush stylized game art consistent with recent village and grass ground images. Dark deep emerald broad tropical leaves, small ferns and a few mossy pebbles ONLY at bottom left and bottom right corners, max height 18% canvas and each corner cluster max 22% canvas width. Central 56% stays completely transparent all the way down to bottom. Entire upper 80% transparent. Subtle red hibiscus flower in right cluster. Flat side view, richer darker foliage than distant background to frame the scene without obscuring gameplay. Real alpha transparency, no solid backdrop. No trees, buildings, platforms, ground strip, sky, text, panels, borders, labels, logos or watermark."
+    }
+  ]
+}

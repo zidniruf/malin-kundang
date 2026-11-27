@@ -1,0 +1,141 @@
+{
+  "ukuran_file": [
+    {
+      "file": "map_bagian_1.png",
+      "lebar": 2020,
+      "tinggi": 720,
+      "tinggi_720": true,
+      "lebar_di_bawah_16384": true
+    },
+    {
+      "file": "map_bagian_2.png",
+      "lebar": 2340,
+      "tinggi": 720,
+      "tinggi_720": true,
+      "lebar_di_bawah_16384": true
+    },
+    {
+      "file": "map_bagian_3.png",
+      "lebar": 1980,
+      "tinggi": 720,
+      "tinggi_720": true,
+      "lebar_di_bawah_16384": true
+    },
+    {
+      "file": "map_full.png",
+      "lebar": 6340,
+      "tinggi": 720,
+      "tinggi_720": true,
+      "lebar_di_bawah_16384": true
+    }
+  ],
+  "sambungan": [
+    {
+      "sambungan": 1,
+      "titik_x": 1100,
+      "selisih_warna_kolom_20px_maks_kanal": 23.8,
+      "selisih_warna_rata_rata": 14.62,
+      "selisih_warna_latar_langit_air": 2.9,
+      "selisih_warna_di_jalur_potong": 20.93,
+      "horizon_y_kiri": null,
+      "horizon_y_kanan": null,
+      "selisih_horizon_px": null
+    },
+    {
+      "sambungan": 2,
+      "titik_x": 2020,
+      "selisih_warna_kolom_20px_maks_kanal": 7.24,
+      "selisih_warna_rata_rata": 6.96,
+      "selisih_warna_latar_langit_air": 1.99,
+      "selisih_warna_di_jalur_potong": 10.98,
+      "horizon_y_kiri": null,
+      "horizon_y_kanan": null,
+      "selisih_horizon_px": null
+    },
+    {
+      "sambungan": 3,
+      "titik_x": 2940,
+      "selisih_warna_kolom_20px_maks_kanal": 15.5,
+      "selisih_warna_rata_rata": 12.32,
+      "selisih_warna_latar_langit_air": 3.28,
+      "selisih_warna_di_jalur_potong": 23.41,
+      "horizon_y_kiri": null,
+      "horizon_y_kanan": 216,
+      "selisih_horizon_px": null
+    },
+    {
+      "sambungan": 4,
+      "titik_x": 4360,
+      "selisih_warna_kolom_20px_maks_kanal": 5.88,
+      "selisih_warna_rata_rata": 2.97,
+      "selisih_warna_latar_langit_air": 1.3,
+      "selisih_warna_di_jalur_potong": 7.44,
+      "horizon_y_kiri": 342,
+      "horizon_y_kanan": null,
+      "selisih_horizon_px": null
+    },
+    {
+      "sambungan": 5,
+      "titik_x": 5260,
+      "selisih_warna_kolom_20px_maks_kanal": 12.64,
+      "selisih_warna_rata_rata": 8.91,
+      "selisih_warna_latar_langit_air": 3.71,
+      "selisih_warna_di_jalur_potong": 20.53,
+      "horizon_y_kiri": null,
+      "horizon_y_kanan": 215,
+      "selisih_horizon_px": null
+    },
+    {
+      "sambungan": "file 1|2",
+      "titik_x": 2020,
+      "selisih_warna_kolom_20px_maks_kanal": 7.24,
+      "selisih_warna_rata_rata": 6.96,
+      "selisih_warna_latar_langit_air": 1.99
+    },
+    {
+      "sambungan": "file 2|3",
+      "titik_x": 4360,
+      "selisih_warna_kolom_20px_maks_kanal": 5.88,
+      "selisih_warna_rata_rata": 2.97,
+      "selisih_warna_latar_langit_air": 1.3
+    }
+  ],
+  "lubang": [
+    {
+      "lubang": 1,
+      "baris_diukur": 98,
+      "selisih_kecerahan_per_baris": 5.44,
+      "rasio_tekstur_dalam_vs_sekitar": 0.78,
+      "batas_bawah_lompatan_vs_baris_biasa": [
+        [
+          6.41,
+          10.07
+        ],
+        [
+          19.91,
+          12.86
+        ]
+      ]
+    },
+    {
+      "lubang": 3,
+      "baris_diukur": 154,
+      "selisih_kecerahan_per_baris": 4.96,
+      "rasio_tekstur_dalam_vs_sekitar": 0.81,
+      "batas_bawah_lompatan_vs_baris_biasa": [
+        [
+          7.89,
+          12.1
+        ],
+        [
+          27.5,
+          19.4
+        ]
+      ]
+    }
+  ],
+  "gabung_ulang_vs_map_full": {
+    "piksel_berbeda": 0,
+    "bbox_selisih": null
+  }
+}
